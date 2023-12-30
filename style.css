@@ -27,6 +27,14 @@
   height: 85.3%;
   background-color: rgb(151, 151, 151);
 }
+#admin-nav {
+  position: absolute;
+  right: 0;
+  top: 93px;
+  width: 250px;
+  height: 85.3%;
+  background-color: rgb(151, 151, 151);
+}
 .btn {
   margin: 10px;
   width: 100px;
@@ -49,7 +57,7 @@
   background-color: rgb(110, 110, 110);
 }
 .nav-elements {
-  margin: 15px 0px 15px 10px;
+  /* margin: 10px 0; */
   padding: 10px;
   font-weight: bold;
   font-size: 130%;
@@ -63,8 +71,8 @@
 
 #login-container {
   position: absolute;
-  top: 30%;
-  left: 40%;
+  top: 20%;
+  left: 35%;
   width: 30%;
   height: 60%;
   background-color: #fff;
@@ -77,16 +85,10 @@
   padding: 50px 50px;
   font-size: 120%;
 }
-.form-elements {
-  height: 35px;
-  margin: 0 0 10px 0;
-}
-.login-input {
+.long-btn {
   height: 40px;
   width: 300px;
   padding: 10px;
-}
-.long-btn {
   margin-top: 10px;
   background-color: rgb(151, 151, 151);
   border-radius: 5px;
@@ -109,13 +111,17 @@
   cursor: pointer;
   color: rgb(70, 70, 70);
 }
+.error {
+  color: red;
+  text-align: center;
+}
 
 /* signup page style */
 
 #signup-container {
   position: absolute;
   top: 20%;
-  left: 40%;
+  left: 35%;
   width: 30%;
   height: 76%;
   border-radius: 10px;
@@ -124,26 +130,14 @@
 .signup-form {
   padding: 15px 55px;
 }
-.signup-form-elements {
-  height: 30px;
-  margin: 0 0 8px 0;
-}
-.signup-input {
-  height: 40px;
-  width: 300px;
-  padding: 10px;
-}
 #gender-option {
-  padding-top: 7px;
-}
-.selection {
-  margin-top: 7px;
+  font-size: 10pt;
 }
 /* search */
 #search-container {
   position: absolute;
-  top: 30%;
-  left: 37%;
+  top: 20%;
+  left: 32%;
   background-color: #fff;
   height: 60%;
   width: 40%;
@@ -160,12 +154,124 @@
 /* services-component */
 #services-container {
   position: absolute;
-  top: 30%;
-  left: 37%;
+  top: 20%;
+  left: 31%;
   background-color: #fff;
   height: 60%;
   width: 40%;
   border-radius: 10px;
   padding: 20px;
   text-align: center;
+}
+.services-list {
+  justify-content: space-between;
+  padding: 20px;
+}
+#add-service-container {
+  position: absolute;
+  top: 20%;
+  left: 35%;
+  width: 29%;
+  height: 70%;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px 50px;
+}
+.input {
+  margin: 10px 0;
+  height: 40px;
+  width: 300px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1.5px solid rgb(151, 151, 151);
+}
+.input:focus {
+  outline: none;
+  border: 1.5px solid rgb(70, 70, 70);
+}
+#service-description {
+  width: 300px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1.5px solid rgb(151, 151, 151);
+}
+#service-description:focus {
+  outline: none;
+  border: 1.5px solid rgb(70, 70, 70);
+}
+/* Branches component */
+#branches-container {
+  position: absolute;
+  top: 20%;
+  left: 35%;
+  width: 29%;
+  height: 70%;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px 50px;
+}
+#add-branch-container {
+  position: absolute;
+  top: 20%;
+  left: 35%;
+  width: 29%;
+  height: 40%;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px 50px;
+}
+/* departments component */
+
+#departments-container {
+  position: absolute;
+  top: 20%;
+  left: 35%;
+  width: 29%;
+  height: 70%;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 30px;
+}
+#add-department-container {
+  position: absolute;
+  top: 20%;
+  left: 35%;
+  width: 29%;
+  height: 30%;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px 50px;
+}
+/* role component */
+#add-role-container {
+  position: absolute;
+  top: 20%;
+  left: 35%;
+  width: 29%;
+  height: 49%;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px 50px;
+}
+/* equipments component */
+
+#equipments-container {
+  position: absolute;
+  top: 20%;
+  left: 35%;
+  width: 29%;
+  height: 70%;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 30px;
+}
+#add-equipment-container {
+  position: absolute;
+  top: 20%;
+  left: 35%;
+  width: 29%;
+  height: 39%;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px 50px;
 }

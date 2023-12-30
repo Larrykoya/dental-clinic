@@ -22,19 +22,35 @@
 
     <div id="nav">
       <div class="nav-elements" onclick="mountSearchComponent()">Search</div>
-      <div class="nav-elements">Services</div>
-      <div class="nav-elements">Branches</div>
+      <div class="nav-elements" onclick="mountServicesComponent()">
+        Services
+      </div>
+      <div class="nav-elements" onclick="mountBranchComponent()">Branches</div>
       <div class="nav-elements">Departments</div>
       <div class="nav-elements">Appointments</div>
       <div class="nav-elements">Announcements</div>
       <div class="nav-elements">Contact Us</div>
     </div>
-    <div id="content">
-      <div id="services-container">
-        <h2 class="label">Our Services</h2>
-        <div id="services"></div>
+    <div id="admin-nav">
+      <div class="nav-elements" onclick="mountSearchComponent()">
+        Search Users
       </div>
+      <div class="nav-elements" onclick="addRole()">Add Role</div>
+      <div class="nav-elements" onclick="mountServicesComponent()">
+        Services
+      </div>
+      <div class="nav-elements" onclick="mountBranchComponent()">Branches</div>
+      <div class="nav-elements" onclick="mountEquipmentsComponent()">
+        Equipments
+      </div>
+      <div class="nav-elements" onclick="mountDepartmentsComponent()">
+        Departments
+      </div>
+      <div class="nav-elements">Appointments</div>
+      <div class="nav-elements">Announcements</div>
+      <div class="nav-elements">Contact Us</div>
     </div>
+    <div id="content"></div>
   </body>
   <script src="script.js"></script>
 </html>
