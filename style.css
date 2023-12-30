@@ -1,0 +1,171 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+.flex {
+  display: flex;
+}
+#header {
+  justify-content: space-between;
+  background-color: rgb(70, 70, 70);
+  height: 93px;
+  padding: 13px;
+}
+#logo {
+  height: 70px;
+  border-radius: 10px;
+}
+#no-deco {
+  text-decoration: none;
+}
+#nav {
+  position: absolute;
+  top: 93px;
+  width: 200px;
+  height: 85.3%;
+  background-color: rgb(151, 151, 151);
+}
+.btn {
+  margin: 10px;
+  width: 100px;
+  height: 50px;
+  background-color: rgb(151, 151, 151);
+  border-radius: 5px;
+  color: #fff;
+  border: none;
+  font-weight: bold;
+}
+.btn:hover {
+  cursor: pointer;
+  border: 1px solid #fff;
+  color: rgb(151, 151, 151);
+  background-color: rgb(70, 70, 70);
+}
+#content {
+  margin-left: 200px;
+  height: 540px;
+  background-color: rgb(110, 110, 110);
+}
+.nav-elements {
+  margin: 15px 0px 15px 10px;
+  padding: 10px;
+  font-weight: bold;
+  font-size: 130%;
+}
+.nav-elements:hover {
+  background-color: #fff;
+  cursor: pointer;
+}
+
+/* Login component style */
+
+#login-container {
+  position: absolute;
+  top: 30%;
+  left: 40%;
+  width: 30%;
+  height: 60%;
+  background-color: #fff;
+  border-radius: 10px;
+}
+.label {
+  text-align: center;
+}
+.login-form {
+  padding: 50px 50px;
+  font-size: 120%;
+}
+.form-elements {
+  height: 35px;
+  margin: 0 0 10px 0;
+}
+.login-input {
+  height: 40px;
+  width: 300px;
+  padding: 10px;
+}
+.long-btn {
+  margin-top: 10px;
+  background-color: rgb(151, 151, 151);
+  border-radius: 5px;
+  color: #fff;
+  border: none;
+  font-weight: bold;
+}
+.long-btn:hover {
+  cursor: pointer;
+  color: rgb(151, 151, 151);
+  background-color: rgb(70, 70, 70);
+}
+#forgot-pass {
+  text-align: center;
+  color: rgb(151, 151, 151);
+  margin: 20px;
+  font-size: 9pt;
+}
+#forgot-pass:hover {
+  cursor: pointer;
+  color: rgb(70, 70, 70);
+}
+
+/* signup page style */
+
+#signup-container {
+  position: absolute;
+  top: 20%;
+  left: 40%;
+  width: 30%;
+  height: 76%;
+  border-radius: 10px;
+  background-color: #fff;
+}
+.signup-form {
+  padding: 15px 55px;
+}
+.signup-form-elements {
+  height: 30px;
+  margin: 0 0 8px 0;
+}
+.signup-input {
+  height: 40px;
+  width: 300px;
+  padding: 10px;
+}
+#gender-option {
+  padding-top: 7px;
+}
+.selection {
+  margin-top: 7px;
+}
+/* search */
+#search-container {
+  position: absolute;
+  top: 30%;
+  left: 37%;
+  background-color: #fff;
+  height: 60%;
+  width: 40%;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+}
+.input-field {
+  padding: 20px;
+  height: 50px;
+  width: 300px;
+  margin-left: 50px;
+}
+/* services-component */
+#services-container {
+  position: absolute;
+  top: 30%;
+  left: 37%;
+  background-color: #fff;
+  height: 60%;
+  width: 40%;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+}

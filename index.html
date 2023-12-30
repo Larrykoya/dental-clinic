@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>CIU | CLINIC</title>
+  </head>
+  <body>
+    <div id="header" class="flex">
+      <a id="no-deco" href="">
+        <div class="flex">
+          <img id="logo" src="./images/logo.jpg" />
+          <button class="btn">HOME</button>
+        </div>
+      </a>
+      <div id="auth">
+        <button onclick="mountLoginComponent()" class="btn">LOG IN</button>
+        <button onclick="mountSignupComponent()" class="btn">SIGN UP</button>
+      </div>
+    </div>
+
+    <div id="nav">
+      <div class="nav-elements" onclick="mountSearchComponent()">Search</div>
+      <div class="nav-elements">Services</div>
+      <div class="nav-elements">Branches</div>
+      <div class="nav-elements">Departments</div>
+      <div class="nav-elements">Appointments</div>
+      <div class="nav-elements">Announcements</div>
+      <div class="nav-elements">Contact Us</div>
+    </div>
+    <div id="content">
+      <div id="services-container">
+        <h2 class="label">Our Services</h2>
+        <div id="services"></div>
+      </div>
+    </div>
+  </body>
+  <script src="script.js"></script>
+</html>
