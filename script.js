@@ -62,7 +62,7 @@ const mountSignupComponent = () => {
       <input class="input" placeholder="Enter Your Phone Number..." type="text" name="phone" id="" >
     
       <input class="input" placeholder="Create a Password" type="password" name="password" id="" required>
-      <div id="gender-option">
+      <div class="radio-option">
       <label for="gender">Male</label>
       <input type="radio" name="gender" id="male" value="male" required />
       <label for="gender">Female</label>
@@ -108,20 +108,18 @@ let mountServicesComponent = () => {
   pane.innerHTML = `
   <div id="services-container">
         <h2 class="label">Our Services</h2>
-        <div class="services-list flex">
-          <div id="services">
-            <h3>service 1</h3>
-            <h3>service 2</h3>
-            <h3>service 3</h3>
+          <div id="services" >
+          <span>
+          <div class="service">
+          <h3>service 1</h3>
+          <div>$900</div>
+          <div>description lorem ipsum dolor an just anywant tis german looking man today vavue in not</div>
+          <input type="button" class="btn" value="Book Now"/>
           </div>
-          <button
-            onclick="mountAddServiceComponent()"
-            class="btn"
-          >
-            Add Service
-          </button>
-        </div>
-      </div>`;
+          </span>         
+          </div>
+          
+  </div>`;
 };
 let mountAddServiceComponent = () => {
   pane.innerHTML = `<div id="add-service-container">
@@ -143,9 +141,9 @@ let mountAddServiceComponent = () => {
       cols="30"
       rows="10"
       required
+      class="textarea"
       placeholder="Enter Service Description..."
     ></textarea>
-    <div class="">
       <input
         class="input"
         type="number"
@@ -154,7 +152,6 @@ let mountAddServiceComponent = () => {
         required
         placeholder="Enter Service Fee..."
       />
-    </div>
     <input type="submit" class="long-btn" value="Add Service" />
   </form>
 </div>`;
@@ -170,13 +167,7 @@ let mountBranchComponent = () => {
       <h3>branch 2</h3>
       <h3>branch 3</h3>
     </div>
-    <button
-      onclick="mountAddBranchComponent()"
-      class="btn"
-    >
-      Add Branch
-    </button>
-  </div>
+    </div>
 </div>`;
 };
 let mountAddBranchComponent = () => {
@@ -327,9 +318,10 @@ let mountReportsComponent = () => {
   <div id="reports-container">
     <h3 class="label">Medical Reports</h3>
     <div id="equipments">
-      <h3>Report 1</h3>
-      <h3>Report 2</h3>
-      <h3>Report 3</h3>
+      <h3>User 1</h3>
+      <p>report content</p>
+      <h3>User 2</h3>
+      <p>report content</p>
     </div>
   </div>`;
 };
@@ -362,7 +354,20 @@ let mountSetAppointment = () => {
 </div>`;
 };
 let mountReviewsComponent = () => {
-  pane.innerHTML;
+  pane.innerHTML = `<div id="reviews-container">
+  <div style="justify-content: space-between" class="flex">
+    <h3 class="label">User Reviews</h3>
+    <button onclick="mountAddReviewComponent()" class="btn review-btn">
+      New Review
+    </button>
+  </div>
+  <div id="reviews">
+    <div>
+      <h3>user name</h3>
+      <p>review content</p>
+    </div>
+  </div>
+</div>`;
 };
 let mountAddReviewComponent = () => {
   pane.innerHTML = `
@@ -375,9 +380,77 @@ let mountAddReviewComponent = () => {
         cols="30"
         rows="10"
         required
+        class="textarea"
         placeholder="Enter Your Review..."
       ></textarea>
       <input type="submit" class="long-btn" value="Submit Review" />
+    </form>
+  </div>`;
+};
+let mountPaymentComponent = () => {
+  pane.innerHTML = `
+  
+  <div id="make-payment-container">
+  <form action="" class="">
+    <h3 class="label">Payment Information:</h3>
+
+    <input
+      class="input"
+      type="text"
+      name="description"
+      id=""
+      placeholder="Payment For"
+      required
+    />
+    <input
+      class="input"
+      type="number"
+      name="amount"
+      id=""
+      placeholder="Payment Amount"
+      required
+    />
+    <div style="justify-content: space-between" class="flex">
+      <h5>Select Payment Method:</h5>
+      <div class="radio-option">
+        <input
+          type="radio"
+          name="Payment-method"
+          id="cash"
+          value="cash"
+          required
+        />
+        <label for="Payment-method">Cash</label>
+        <input
+          type="radio"
+          name="Payment-method"
+          id="card"
+          value="card"
+          required
+        />
+        <label for="Payment-method">Card</label>
+      </div>
+    </div>
+
+    <input type="submit" class="long-btn" value="Make Payment" />
+  </form>
+</div>`;
+};
+let createMedicalReport = () => {
+  pane.innerHTML = `
+  <div id="create-report-container">
+    <form action="" class="">
+      <h3 class="label">Create Medical Report</h3>
+      <textarea
+        name="medical-report"
+        id="medical-report"
+        cols="30"
+        rows="10"
+        class="textarea"
+        required
+        placeholder="Enter Medical Report..."
+      ></textarea>
+      <input type="submit" class="long-btn" value="Submit Report" />
     </form>
   </div>`;
 };

@@ -20,8 +20,8 @@
       </div>
     </div>
 
+    <!-- Users nav -->
     <div id="nav">
-      <div class="nav-elements" onclick="mountSearchComponent()">Search</div>
       <div class="nav-elements" onclick="mountServicesComponent()">
         Services
       </div>
@@ -31,18 +31,24 @@
       <div class="nav-elements" onclick="mountSetAppointment()">
         New Appointment
       </div>
-      <div class="nav-elements">User Reviews</div>
+      <div class="nav-elements" onclick="mountPaymentComponent()">
+        Make Payment
+      </div>
+      <div class="nav-elements" onclick="mountReviewsComponent()">
+        User Reviews
+      </div>
       <div class="nav-elements">Contact Us</div>
     </div>
+
+    <!-- admin nav -->
     <div id="admin-nav">
-      <div class="nav-elements" onclick="mountSearchComponent()">
-        Search Users
-      </div>
       <div class="nav-elements" onclick="addRole()">Add Role</div>
-      <div class="nav-elements" onclick="mountServicesComponent()">
-        Services
+      <div class="nav-elements" onclick="mountSearchComponent()">
+        Search User
       </div>
-      <div class="nav-elements" onclick="mountBranchComponent()">Branches</div>
+      <div class="nav-elements" onclick="mountAddServiceComponent()">
+        Add Service
+      </div>
       <div class="nav-elements" onclick="mountEquipmentsComponent()">
         Equipments
       </div>
@@ -53,24 +59,12 @@
       <div class="nav-elements" onclick="mountReportsComponent()">
         Medical Reports
       </div>
+      <div class="nav-elements" onclick="mountAddBranchComponent()">
+        Add New Branch
+      </div>
       <div class="nav-elements">New Announcement</div>
     </div>
-    <div id="content">
-      <div id="reviews-container">
-        <div style="justify-content: space-between" class="flex">
-          <h3 class="label">User Reviews</h3>
-          <button onclick="mountAddReviewComponent()" class="btn review-btn">
-            New Review
-          </button>
-        </div>
-        <div id="reviews">
-          <div>
-            <h3>user name</h3>
-            <p>review content</p>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div id="content"></div>
   </body>
   <script src="script.js"></script>
 </html>
