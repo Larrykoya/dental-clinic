@@ -64,9 +64,9 @@ const mountSignupComponent = () => {
       <input class="input" placeholder="Create a Password" type="password" name="password" id="" required>
       <div id="gender-option">
       <label for="gender">Male</label>
-      <input type="radio" name="gender" id="male" value"male" required />
+      <input type="radio" name="gender" id="male" value="male" required />
       <label for="gender">Female</label>
-      <input type="radio" name="gender" id="female" value"female" required />
+      <input type="radio" name="gender" id="female" value="female" required />
       </div>
       <select required name="user-type" id="" class="input selection">
           <option value="patient">
@@ -163,7 +163,7 @@ let mountBranchComponent = () => {
   pane.innerHTML = `
   
   <div id="branches-container">
-  <h3 class="label">Our Branches:</h3>
+  <h3 class="label">Our Branches</h3>
   <div class="services-list flex">
     <div id="branches">
       <h3>branch 1</h3>
@@ -321,6 +321,65 @@ let mountAddEquipmentComponent = () => {
     <input type="submit" class="long-btn" value="Add Equipment" />
   </form>
 </div>`;
+};
+let mountReportsComponent = () => {
+  pane.innerHTML = `
+  <div id="reports-container">
+    <h3 class="label">Medical Reports</h3>
+    <div id="equipments">
+      <h3>Report 1</h3>
+      <h3>Report 2</h3>
+      <h3>Report 3</h3>
+    </div>
+  </div>`;
+};
+let mountSetAppointment = () => {
+  pane.innerHTML = `<div id="appointment-container">
+  <form action="">
+    <h3 class="label">Make an Appointment</h3>
+    <input
+      class="input"
+      placeholder="Select appointment date..."
+      type="date"
+      name="appointment-date"
+      id=""
+      required
+    />
+    <input
+      class="input"
+      placeholder="Select appointment time..."
+      type="time"
+      name="appointment-time"
+      id=""
+      required
+    />
+    <select required name="dentist" id="" class="input">
+      <option></option>
+      <option value="patient">Dentist 1</option>
+    </select>
+    <input type="submit" class="long-btn" value="Make Appointment" />
+  </form>
+</div>`;
+};
+let mountReviewsComponent = () => {
+  pane.innerHTML;
+};
+let mountAddReviewComponent = () => {
+  pane.innerHTML = `
+  <div id="add-review-container">
+    <form action="">
+      <h3 class="label">Add a Review</h3>
+      <textarea
+        name="user-review"
+        id="user-review"
+        cols="30"
+        rows="10"
+        required
+        placeholder="Enter Your Review..."
+      ></textarea>
+      <input type="submit" class="long-btn" value="Submit Review" />
+    </form>
+  </div>`;
 };
 // setCookie("name", "alice", 0.25);
 

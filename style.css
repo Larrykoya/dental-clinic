@@ -23,7 +23,7 @@
 #nav {
   position: absolute;
   top: 93px;
-  width: 200px;
+  width: 220px;
   height: 85.3%;
   background-color: rgb(151, 151, 151);
 }
@@ -274,4 +274,61 @@
   background-color: #fff;
   border-radius: 10px;
   padding: 20px 50px;
+}
+/* reports-container */
+#reports-container {
+  position: absolute;
+  top: 20%;
+  left: 35%;
+  width: 29%;
+  height: 70%;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 30px;
+}
+/* appointments style */
+#appointment-container {
+  position: absolute;
+  top: 20%;
+  left: 35%;
+  width: 30%;
+  height: 50%;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 30px 57px;
+}
+/* review style */
+#reviews-container {
+  position: absolute;
+  top: 20%;
+  left: 35%;
+  width: 29%;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+#add-review-container {
+  position: absolute;
+  top: 20%;
+  left: 35%;
+  width: 29%;
+  height: 53%;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px 50px;
+}
+#user-review {
+  width: 300px;
+  padding: 10px;
+  margin-top: 15px;
+  border-radius: 5px;
+  border: 1.5px solid rgb(151, 151, 151);
+}
+#user-review:focus {
+  outline: none;
+  border: 1.5px solid rgb(70, 70, 70);
+}
+.review-btn {
+  margin-top: -7px;
 }

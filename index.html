@@ -27,8 +27,11 @@
       </div>
       <div class="nav-elements" onclick="mountBranchComponent()">Branches</div>
       <div class="nav-elements">Departments</div>
-      <div class="nav-elements">Appointments</div>
       <div class="nav-elements">Announcements</div>
+      <div class="nav-elements" onclick="mountSetAppointment()">
+        New Appointment
+      </div>
+      <div class="nav-elements">User Reviews</div>
       <div class="nav-elements">Contact Us</div>
     </div>
     <div id="admin-nav">
@@ -47,10 +50,27 @@
         Departments
       </div>
       <div class="nav-elements">Appointments</div>
-      <div class="nav-elements">Announcements</div>
-      <div class="nav-elements">Contact Us</div>
+      <div class="nav-elements" onclick="mountReportsComponent()">
+        Medical Reports
+      </div>
+      <div class="nav-elements">New Announcement</div>
     </div>
-    <div id="content"></div>
+    <div id="content">
+      <div id="reviews-container">
+        <div style="justify-content: space-between" class="flex">
+          <h3 class="label">User Reviews</h3>
+          <button onclick="mountAddReviewComponent()" class="btn review-btn">
+            New Review
+          </button>
+        </div>
+        <div id="reviews">
+          <div>
+            <h3>user name</h3>
+            <p>review content</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
   <script src="script.js"></script>
 </html>
