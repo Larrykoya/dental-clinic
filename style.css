@@ -207,7 +207,6 @@
   top: 20%;
   left: 35%;
   width: 29%;
-  height: 70%;
   background-color: #fff;
   border-radius: 10px;
   padding: 20px 50px;
@@ -217,7 +216,6 @@
   top: 20%;
   left: 35%;
   width: 29%;
-  height: 40%;
   background-color: #fff;
   border-radius: 10px;
   padding: 20px 50px;
@@ -229,7 +227,6 @@
   top: 20%;
   left: 35%;
   width: 29%;
-  height: 70%;
   background-color: #fff;
   border-radius: 10px;
   padding: 30px;
@@ -239,7 +236,6 @@
   top: 20%;
   left: 35%;
   width: 29%;
-  height: 30%;
   background-color: #fff;
   border-radius: 10px;
   padding: 20px 50px;
@@ -250,7 +246,6 @@
   top: 20%;
   left: 35%;
   width: 29%;
-  height: 49%;
   background-color: #fff;
   border-radius: 10px;
   padding: 20px 50px;
@@ -262,7 +257,6 @@
   top: 20%;
   left: 35%;
   width: 29%;
-  height: 70%;
   background-color: #fff;
   border-radius: 10px;
   padding: 30px;
@@ -272,7 +266,6 @@
   top: 20%;
   left: 35%;
   width: 29%;
-  height: 39%;
   background-color: #fff;
   border-radius: 10px;
   padding: 20px 50px;
@@ -298,7 +291,7 @@
 }
 
 /* appointments style */
-#appointment-container {
+#create-appointment-container {
   position: absolute;
   top: 20%;
   left: 35%;
@@ -307,6 +300,27 @@
   background-color: #fff;
   border-radius: 10px;
   padding: 30px 57px;
+}
+#appointments-container {
+  position: absolute;
+  top: 20%;
+  left: 31%;
+  background-color: #fff;
+  width: 35%;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+}
+#appointments {
+  display: flex;
+  overflow-x: scroll;
+}
+.appointment {
+  padding: 8px;
+  margin: 10px;
+  background-color: rgb(110, 110, 110);
+  border-radius: 10px;
+  border: 1px solid rgb(70, 70, 70);
 }
 /* review style */
 #reviews-container {
@@ -334,6 +348,17 @@
 }
 /* payments style */
 #make-payment-container {
+  position: absolute;
+  top: 20%;
+  left: 35%;
+  width: 29%;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px 50px;
+}
+
+/* announcements component */
+#announcements-container {
   position: absolute;
   top: 20%;
   left: 35%;

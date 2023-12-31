@@ -113,7 +113,7 @@ let mountServicesComponent = () => {
           <div class="service">
           <h3>service 1</h3>
           <div>$900</div>
-          <div>description lorem ipsum dolor an just anywant tis german looking man today vavue in not</div>
+          <div>description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non luctus nulla</div>
           <input type="button" class="btn" value="Book Now"/>
           </div>
           </span>         
@@ -157,9 +157,7 @@ let mountAddServiceComponent = () => {
 </div>`;
 };
 let mountBranchComponent = () => {
-  pane.innerHTML = `
-  
-  <div id="branches-container">
+  pane.innerHTML = `<div id="branches-container">
   <h3 class="label">Our Branches</h3>
   <div class="services-list flex">
     <div id="branches">
@@ -325,8 +323,48 @@ let mountReportsComponent = () => {
     </div>
   </div>`;
 };
+let mountAppointmentComponent = () => {
+  pane.innerHTML = `<div id="appointments-container">
+  <h2 class="label">Appointments</h2>
+  <div id="appointments">
+    <span>
+      <div class="appointment">
+        <h3>Patient Name</h3>
+        <h4>Dr name</h4>
+        <p>Date</p>
+        <p>Time</p>
+        <input type="button" class="btn" value="Cancel" />
+      </div>
+    </span>
+    <span>
+      <div class="appointment">
+        <h3>Patient Name</h3>
+        <h4>Dr name</h4>
+        <p>Date</p>
+        <p>Time</p>
+        <input type="button" class="btn" value="Cancel" />
+      </div>
+    </span>
+    <span>
+      <div class="appointment">
+        <h3>Patient Name</h3>
+        <h4>Dr name</h4>
+        <p>Date</p>
+        <p>Time</p>
+        <input type="button" class="btn" value="Cancel" />
+      </div>
+    </span>
+  </div>
+  <input
+    type="submit"
+    onclick="mountSetAppointment()"
+    class="long-btn"
+    value="Create New Appointment"
+  />
+</div>`;
+};
 let mountSetAppointment = () => {
-  pane.innerHTML = `<div id="appointment-container">
+  pane.innerHTML = `<div id="create-appointment-container">
   <form action="">
     <h3 class="label">Make an Appointment</h3>
     <input
@@ -358,7 +396,7 @@ let mountReviewsComponent = () => {
   <div style="justify-content: space-between" class="flex">
     <h3 class="label">User Reviews</h3>
     <button onclick="mountAddReviewComponent()" class="btn review-btn">
-      New Review
+      Add Review
     </button>
   </div>
   <div id="reviews">
@@ -453,6 +491,22 @@ let createMedicalReport = () => {
       <input type="submit" class="long-btn" value="Submit Report" />
     </form>
   </div>`;
+};
+let mountAnnouncementComponent = () => {
+  pane.innerHTML = `
+  <div id="announcements-container">
+  <h3 class="label">Announcements</h3>
+  <div id="announcements">
+    <div class="announcement">
+      <h3>Title</h3>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non
+        luctus nulla.
+      </p>
+    </div>
+  </div>
+</div>
+  `;
 };
 // setCookie("name", "alice", 0.25);
 
