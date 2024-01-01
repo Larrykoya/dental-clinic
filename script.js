@@ -62,13 +62,18 @@ const mountSignupComponent = () => {
       <input class="input" placeholder="Enter Your Phone Number..." type="text" name="phone" id="" >
     
       <input class="input" placeholder="Create a Password" type="password" name="password" id="" required>
-      <div class="radio-option">
-      <label for="gender">Male</label>
-      <input type="radio" name="gender" id="male" value="male" required />
-      <label for="gender">Female</label>
-      <input type="radio" name="gender" id="female" value="female" required />
+      <div style="justify-content: space-between" class="flex">
+        <h5>Select Gender:</h5>
+        <div class="radio-option">
+          <input type="radio" name="gender" id="male" value="male" required />
+          <label for="gender">Male</label>
+          <input type="radio" name="gender" id="female" value="female" required />
+          <label for="gender">Female</label>
+          </div>
       </div>
       <select required name="user-type" id="" class="input selection">
+          <option>
+          </option>
           <option value="patient">
               Patient
           </option>
@@ -106,11 +111,11 @@ let mountSearchComponent = () => {
 };
 let mountServicesComponent = () => {
   pane.innerHTML = `
-  <div id="services-container">
+  <div  class="scroll-container">
         <h2 class="label">Our Services</h2>
-          <div id="services" >
+          <div id="services"  class="scroll-items" >
           <span>
-          <div class="service">
+          <div class="scroll-item">
           <h3>service 1</h3>
           <div>$900</div>
           <div>description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non luctus nulla</div>
@@ -139,7 +144,7 @@ let mountAddServiceComponent = () => {
       name="service-description"
       id="service-description"
       cols="30"
-      rows="10"
+      rows="5"
       required
       class="textarea"
       placeholder="Enter Service Description..."
@@ -291,7 +296,7 @@ let mountAddEquipmentComponent = () => {
       <input
         class="input"
         type="text"
-        name="euipment-name"
+        name="equipment-name"
         id=""
         placeholder="Enter Equipment Name..."
         required
@@ -301,7 +306,7 @@ let mountAddEquipmentComponent = () => {
       <input
         class="input"
         type="text"
-        name="euipment-desc"
+        name="equipment-desc"
         id=""
         placeholder="Enter Equipment Description..."
         required
@@ -324,11 +329,11 @@ let mountReportsComponent = () => {
   </div>`;
 };
 let mountAppointmentComponent = () => {
-  pane.innerHTML = `<div id="appointments-container">
+  pane.innerHTML = `<div class="scroll-container">
   <h2 class="label">Appointments</h2>
-  <div id="appointments">
+  <div id="appointments" class="scroll-items">
     <span>
-      <div class="appointment">
+      <div class="scroll-item">
         <h3>Patient Name</h3>
         <h4>Dr name</h4>
         <p>Date</p>
@@ -337,7 +342,7 @@ let mountAppointmentComponent = () => {
       </div>
     </span>
     <span>
-      <div class="appointment">
+      <div class="scroll-item">
         <h3>Patient Name</h3>
         <h4>Dr name</h4>
         <p>Date</p>
@@ -346,7 +351,7 @@ let mountAppointmentComponent = () => {
       </div>
     </span>
     <span>
-      <div class="appointment">
+      <div class="scroll-item">
         <h3>Patient Name</h3>
         <h4>Dr name</h4>
         <p>Date</p>
@@ -385,7 +390,11 @@ let mountSetAppointment = () => {
     />
     <select required name="dentist" id="" class="input">
       <option></option>
-      <option value="patient">Dentist 1</option>
+      <option value="dentist1">Dentist 1</option>
+    </select>
+    <select required name="patient" id="" class="input">
+      <option></option>
+      <option value="patient">patient 1</option>
     </select>
     <input type="submit" class="long-btn" value="Make Appointment" />
   </form>
@@ -416,7 +425,7 @@ let mountAddReviewComponent = () => {
         name="user-review"
         id="user-review"
         cols="30"
-        rows="10"
+        rows="5"
         required
         class="textarea"
         placeholder="Enter Your Review..."
@@ -507,6 +516,88 @@ let mountAnnouncementComponent = () => {
   </div>
 </div>
   `;
+};
+let mountCreateAnnouncement = () => {
+  pane.innerHTML = `
+  <div id="announcements-container">
+    <form action="" class="">
+      <h2 class="label">Create New Announcement</h2>
+
+      <input
+        class="input"
+        type="text"
+        name="title"
+        id=""
+        placeholder="Add Title..."
+        required
+      />
+      <textarea
+        name="announcement"
+        id="announcement"
+        cols="30"
+        rows="5"
+        class="textarea"
+        required
+        placeholder="Enter Announcement..."
+      ></textarea>
+      <input type="submit" class="long-btn" value="Post Announcement" />
+    </form>
+  </div>`;
+};
+let mountScheduleVisitComponent = () => {
+  pane.innerHTML = `<div id="schedule-visit-container">
+  <form action="">
+    <h3 class="label">Schedule a Visit</h3>
+    <input
+      class="input"
+      type="text"
+      name="patient-name"
+      id=""
+      placeholder="Enter Patient Name..."
+      required
+    />
+    <input class="input" type="date" name="visit-date" id="" required />
+    <input class="input" type="time" name="visit-time" id="" required />
+    <input type="submit" class="long-btn" value="Schedule Visit" />
+  </form>
+</div>`;
+};
+let mountBookings = () => {
+  pane.innerHTML = `<div class="scroll-container">
+  <h2 class="label">Bookings</h2>
+  <div id="bookings" class="scroll-items">
+    <span>
+      <div class="scroll-item">
+        <h3>Patient Name</h3>
+        <p>Service Lorem ipsum dolor sit amet, consectetur adipiscing</p>
+        <p>date</p>
+        <button onclick="mountSetAppointment()" class="btn">
+          Prepare Appointment
+        </button>
+      </div>
+    </span>
+    <span>
+      <div class="scroll-item">
+        <h3>Patient Name</h3>
+        <p>Service Lorem ipsum dolor sit amet, consectetur adipiscing</p>
+        <p>date</p>
+        <button onclick="mountSetAppointment()" class="btn">
+          Prepare Appointment
+        </button>
+      </div>
+    </span>
+    <span>
+      <div class="scroll-item">
+        <h3>Patient Name</h3>
+        <p>Service Lorem ipsum dolor sit amet, consectetur adipiscing</p>
+        <p>date</p>
+        <button onclick="mountSetAppointment()" class="btn">
+          Prepare Appointment
+        </button>
+      </div>
+    </span>
+  </div>
+</div>`;
 };
 // setCookie("name", "alice", 0.25);
 

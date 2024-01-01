@@ -11,7 +11,7 @@
   justify-content: space-between;
   background-color: rgb(70, 70, 70);
   height: 93px;
-  padding: 13px;
+  padding: 13px 0 13px 23px;
 }
 #logo {
   height: 70px;
@@ -23,7 +23,7 @@
 #nav {
   position: absolute;
   top: 93px;
-  width: 220px;
+  width: 235px;
   height: 85.3%;
   background-color: rgb(151, 151, 151);
 }
@@ -31,7 +31,7 @@
   position: absolute;
   right: 0;
   top: 93px;
-  width: 250px;
+  width: 235px;
   height: 85.3%;
   background-color: rgb(151, 151, 151);
 }
@@ -51,6 +51,10 @@
   color: rgb(151, 151, 151);
   background-color: rgb(70, 70, 70);
 }
+.btn:active {
+  color: #fff;
+  background-color: rgb(110, 110, 110);
+}
 #content {
   margin-left: 200px;
   height: 540px;
@@ -59,29 +63,23 @@
 .nav-elements {
   padding: 10px;
   font-weight: bold;
+  width: 235px;
+  background-color: rgb(151, 151, 151);
+  border: none;
   font-size: 130%;
+  border-bottom: 2px solid rgb(70, 70, 70);
 }
 .nav-elements:hover {
-  background-color: #fff;
+  background-color: rgb(70, 70, 70);
+  color: #fff;
   cursor: pointer;
 }
-
-/* Login component style */
-
-#login-container {
-  position: absolute;
-  top: 20%;
-  left: 35%;
-  width: 30%;
-  background-color: #fff;
-  border-radius: 10px;
+.nav-elements:focus {
+  background-color: #000;
+  color: #fff;
 }
 .label {
   text-align: center;
-}
-.login-form {
-  padding: 50px 50px;
-  font-size: 120%;
 }
 .long-btn {
   height: 40px;
@@ -98,6 +96,73 @@
   cursor: pointer;
   color: rgb(151, 151, 151);
   background-color: rgb(70, 70, 70);
+}
+.long-btn:active {
+  color: #fff;
+  background-color: rgb(110, 110, 110);
+}
+.radio-option {
+  font-size: 10pt;
+}
+.input {
+  margin: 10px 0;
+  height: 40px;
+  width: 300px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1.5px solid rgb(151, 151, 151);
+}
+.input:focus {
+  outline: none;
+  border: 1.5px solid rgb(70, 70, 70);
+}
+.textarea {
+  width: 300px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1.5px solid rgb(151, 151, 151);
+}
+.textarea:focus {
+  outline: none;
+  border: 1.5px solid rgb(70, 70, 70);
+}
+
+.scroll-container {
+  position: absolute;
+  top: 20%;
+  left: 31%;
+  background-color: #fff;
+  width: 35%;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+}
+.scroll-items {
+  display: flex;
+  overflow-x: scroll;
+}
+.scroll-item {
+  padding: 8px;
+  width: 200px;
+  margin: 10px;
+  background-color: rgb(110, 110, 110);
+  border-radius: 10px;
+  border: 1px solid rgb(70, 70, 70);
+}
+
+/* Login component style */
+
+#login-container {
+  position: absolute;
+  top: 20%;
+  left: 35%;
+  width: 30%;
+  background-color: #fff;
+  border-radius: 10px;
+}
+.login-form {
+  padding: 50px 50px;
+  font-size: 120%;
 }
 #forgot-pass {
   text-align: center;
@@ -127,9 +192,6 @@
 .signup-form {
   padding: 15px 55px;
 }
-.radio-option {
-  font-size: 10pt;
-}
 /* search */
 #search-container {
   position: absolute;
@@ -148,28 +210,6 @@
   margin-left: 50px;
 }
 /* services-component */
-#services-container {
-  position: absolute;
-  top: 20%;
-  left: 31%;
-  background-color: #fff;
-  width: 35%;
-  border-radius: 10px;
-  padding: 20px;
-  text-align: center;
-}
-#services {
-  display: flex;
-  overflow-x: scroll;
-}
-.service {
-  padding: 8px;
-  width: 200px;
-  margin: 10px;
-  background-color: rgb(110, 110, 110);
-  border-radius: 10px;
-  border: 1px solid rgb(70, 70, 70);
-}
 #add-service-container {
   position: absolute;
   top: 20%;
@@ -178,28 +218,6 @@
   background-color: #fff;
   border-radius: 10px;
   padding: 20px 50px;
-}
-.input {
-  margin: 10px 0;
-  height: 40px;
-  width: 300px;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1.5px solid rgb(151, 151, 151);
-}
-.input:focus {
-  outline: none;
-  border: 1.5px solid rgb(70, 70, 70);
-}
-.textarea {
-  width: 300px;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1.5px solid rgb(151, 151, 151);
-}
-.textarea:focus {
-  outline: none;
-  border: 1.5px solid rgb(70, 70, 70);
 }
 /* Branches component */
 #branches-container {
@@ -296,31 +314,9 @@
   top: 20%;
   left: 35%;
   width: 30%;
-  height: 50%;
   background-color: #fff;
   border-radius: 10px;
   padding: 30px 57px;
-}
-#appointments-container {
-  position: absolute;
-  top: 20%;
-  left: 31%;
-  background-color: #fff;
-  width: 35%;
-  border-radius: 10px;
-  padding: 20px;
-  text-align: center;
-}
-#appointments {
-  display: flex;
-  overflow-x: scroll;
-}
-.appointment {
-  padding: 8px;
-  margin: 10px;
-  background-color: rgb(110, 110, 110);
-  border-radius: 10px;
-  border: 1px solid rgb(70, 70, 70);
 }
 /* review style */
 #reviews-container {
@@ -359,6 +355,35 @@
 
 /* announcements component */
 #announcements-container {
+  position: absolute;
+  top: 20%;
+  left: 35%;
+  width: 29%;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px 50px;
+}
+/* schedule visit */
+.schedule-visit {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 40px;
+  width: 212px;
+  padding: 10px;
+  margin: 10px;
+  background-color: rgb(70, 70, 70);
+  border-radius: 5px;
+  color: rgb(151, 151, 151);
+  border: none;
+  font-weight: bold;
+}
+.schedule-visit:hover {
+  cursor: pointer;
+  color: #fff;
+  background-color: #000;
+}
+#schedule-visit-container {
   position: absolute;
   top: 20%;
   left: 35%;

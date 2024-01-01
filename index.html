@@ -22,47 +22,57 @@
 
     <!-- Users nav -->
     <div id="nav">
-      <div class="nav-elements" onclick="mountServicesComponent()">
+      <button class="nav-elements" onclick="mountServicesComponent()">
         Services
-      </div>
-      <div class="nav-elements" onclick="mountBranchComponent()">Branches</div>
-      <div class="nav-elements" onclick="mountAnnouncementComponent()">
-        Announcements
-      </div>
-      <div class="nav-elements" onclick="mountPaymentComponent()">
-        Make Payment
-      </div>
-      <div class="nav-elements" onclick="mountReviewsComponent()">
+      </button>
+      <button class="nav-elements" onclick="mountBranchComponent()">
+        Branches
+      </button>
+      <button class="nav-elements" onclick="mountReviewsComponent()">
         User Reviews
-      </div>
-      <div class="nav-elements">Contact Us</div>
+      </button>
+      <button class="nav-elements" onclick="mountPaymentComponent()">
+        Make Payment
+      </button>
+      <button class="nav-elements" onclick="mountAnnouncementComponent()">
+        Announcements
+      </button>
+      <input
+        type="button"
+        onclick="mountScheduleVisitComponent()"
+        class="schedule-visit"
+        value="Schedule a Visit"
+      />
     </div>
 
     <!-- admin nav -->
     <div id="admin-nav">
-      <div class="nav-elements" onclick="addRole()">Add Role</div>
-      <div class="nav-elements" onclick="mountSearchComponent()">
+      <button class="nav-elements" onclick="addRole()">Add Role</button>
+      <button class="nav-elements" onclick="mountBookings()">Bookings</button>
+      <button class="nav-elements" onclick="mountSearchComponent()">
         Search User
-      </div>
-      <div class="nav-elements" onclick="mountAddServiceComponent()">
+      </button>
+      <button class="nav-elements" onclick="mountAddServiceComponent()">
         Add Service
-      </div>
-      <div class="nav-elements" onclick="mountEquipmentsComponent()">
+      </button>
+      <button class="nav-elements" onclick="mountEquipmentsComponent()">
         Equipments
-      </div>
-      <div class="nav-elements" onclick="mountDepartmentsComponent()">
+      </button>
+      <button class="nav-elements" onclick="mountDepartmentsComponent()">
         Departments
-      </div>
-      <div class="nav-elements" onclick="mountAppointmentComponent()">
+      </button>
+      <button class="nav-elements" onclick="mountAppointmentComponent()">
         Appointments
-      </div>
-      <div class="nav-elements" onclick="mountReportsComponent()">
+      </button>
+      <button class="nav-elements" onclick="mountReportsComponent()">
         Medical Reports
-      </div>
-      <div class="nav-elements" onclick="mountAddBranchComponent()">
+      </button>
+      <button class="nav-elements" onclick="mountAddBranchComponent()">
         Add New Branch
-      </div>
-      <div class="nav-elements">New Announcement</div>
+      </button>
+      <button class="nav-elements" onclick="mountCreateAnnouncement()">
+        New Announcement
+      </button>
     </div>
     <div id="content"></div>
   </body>
