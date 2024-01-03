@@ -1,4 +1,5 @@
 let pane = document.getElementById("content");
+//crypto.randomUUID()
 // const dataToSend = { key: "value" };
 // fetch("index.php", {
 //   method: "POST",
@@ -328,6 +329,24 @@ let mountReportsComponent = () => {
     </div>
   </div>`;
 };
+let createMedicalReport = () => {
+  pane.innerHTML = `
+  <div id="create-report-container">
+    <form action="" class="">
+      <h3 class="label">Create Medical Report</h3>
+      <textarea
+        name="medical-report"
+        id="medical-report"
+        cols="30"
+        rows="10"
+        class="textarea"
+        required
+        placeholder="Enter Medical Report..."
+      ></textarea>
+      <input type="submit" class="long-btn" value="Submit Report" />
+    </form>
+  </div>`;
+};
 let mountAppointmentComponent = () => {
   pane.innerHTML = `<div class="scroll-container">
   <h2 class="label">Appointments</h2>
@@ -482,24 +501,6 @@ let mountPaymentComponent = () => {
     <input type="submit" class="long-btn" value="Make Payment" />
   </form>
 </div>`;
-};
-let createMedicalReport = () => {
-  pane.innerHTML = `
-  <div id="create-report-container">
-    <form action="" class="">
-      <h3 class="label">Create Medical Report</h3>
-      <textarea
-        name="medical-report"
-        id="medical-report"
-        cols="30"
-        rows="10"
-        class="textarea"
-        required
-        placeholder="Enter Medical Report..."
-      ></textarea>
-      <input type="submit" class="long-btn" value="Submit Report" />
-    </form>
-  </div>`;
 };
 let mountAnnouncementComponent = () => {
   pane.innerHTML = `
