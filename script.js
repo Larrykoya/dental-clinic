@@ -52,23 +52,23 @@ let mountLoginComponent = () => {
 };
 const mountSignupComponent = () => {
   pane.innerHTML = `<div id="signup-container">
-  <form action="" class="signup-form">
+  <form action="" class="signup-form"  onsubmit="signup(event)">
       <h3 class="label">Create an account</h3>
-      <input class="input" placeholder="Enter Your Firstname..." type="text" name="fname" id="" required>
+      <input class="input" placeholder="Enter Your Firstname..." type="text" name="fname" id="" >
 
-      <input class="input" placeholder="Enter Your Lastname..." type="text" name="lname" id="" required>
+      <input class="input" placeholder="Enter Your Lastname..." type="text" name="lname" id="" >
       
-      <input class="input" placeholder="Enter Your Email..." type="email" name="email" id="" required>
+      <input class="input" placeholder="Enter Your Email..." type="email" name="email" id="" >
 
       <input class="input" placeholder="Enter Your Phone Number..." type="text" name="phone" id="" >
     
-      <input class="input" placeholder="Create a Password" type="password" name="password" id="" required>
+      <input class="input" placeholder="Create a Password" type="password" name="password" id="" >
       <div style="justify-content: space-between" class="flex">
         <h5>Select Gender:</h5>
         <div class="radio-option">
-          <input type="radio" name="gender" id="male" value="male" required />
+          <input type="radio" name="gender" id="male" value="male"  />
           <label for="gender">Male</label>
-          <input type="radio" name="gender" id="female" value="female" required />
+          <input type="radio" name="gender" id="female" value="female"  />
           <label for="gender">Female</label>
           </div>
       </div>

@@ -1,48 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign up</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div id="signup-background">
-        <div id="signup-container">
-            <form action="" class="signup-form">
-                <h2>Create an account</h2>
-                <label for="fname">Firstname</label>
-                <div class="signup-form-elements"><input class="signup-input" type="text" name="fname" id="" required></div>
-<div >
-<label for="lname">Lastname</label>
-                <div class="signup-form-elements"><input class="signup-input" type="text" name="lname" id="" required></div>
-<div >
-    <label for="email">Email</label></div>
-                <div class="signup-form-elements"><input class="signup-input" type="text" name="phone" id="" required></div>
-                <label for="phone">Phone Number</label>
-                <div class="signup-form-elements"><input class="signup-input" type="text" name="lname" id="" required></div>
-<div >
-                <div ><label for="password">Password</label></div>
+<?php
 
-                <div class="signup-form-elements"><input class="signup-input" type="password" name="password" id="" required></div>
-                <select name="user-type" id="" class="signup-input">
-                    <option value="Patient">
-                        Patient
-                    </option>
-                    <option value="employee">
-                        Employee
-                    </option>
-                    <option value="Visitor">
-                        Visitor
-                    </option>
-                </select>
-                <input type="submit" class="signup-input signup-btn" value="Create Account">
-                
-            </form>
 
-        </div>
-    </div>
+//database variables
+$servername = "localhost";
+$dbusername = "root";
+$dbpassword = "";
+$dbname = "dental_clinic_db";
 
+//database connection 
+try {
+    $conn = mysqli_connect($servername, $dbusername, $dbpassword, $dbname);
     
-</body>
-</html>
+        echo "Database Connected Successfully!";
+} catch (mysqli_sql_exception $e) {
+    echo("connection failed: " . mysqli_connect_error()."<br>");
+       }
+
+// Handle the incoming request from JavaScript
+$input = json_decode(file_get_contents('php://input'), true);
+$id = $input['id'];
+$firstname = $input['firstname'];
+      $lastname = $input['lastname'];
+      $email = $input['email'];
+      $phone = $input['phone'];
+      $password = $input['password'];
+      $gender = $input['gender'];
+      $users=$input['role']."s";
+      $user_id = $input['role']."_id";
+      $success = null;
+
+try {
+    $insert_query = "INSERT INTO $users($user_id,firstname,lastname,email,phone,password,gender) VALUES('$id','$firstname','$lastname','$email','$phone','$password','$gender')";
+    $success = mysqli_query($conn,$insert_query);
+  } catch (mysqli_sql_exception $e) {
+    echo ($e);
+    //checking for duplicate username error
+    // $duplicate = stristr($e,"Duplicate");
+  }
+// Send a response back to JavaScript
+if ($success) {
+    echo "user created successfully";
+}
+// echo json_encode($response);
+
+mysqli_close($conn);
+?>
