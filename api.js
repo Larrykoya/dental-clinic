@@ -44,6 +44,7 @@ function login(event) {
   event.preventDefault();
   let email = event.target[0].value;
   let password = event.target[1].value;
+  let role = event.target[2].value;
   fetch("login.php", {
     method: "POST",
     headers: {
@@ -52,6 +53,7 @@ function login(event) {
     body: JSON.stringify({
       email,
       password,
+      role,
     }),
   })
     .then((response) => {

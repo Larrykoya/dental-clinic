@@ -21,7 +21,7 @@ let pane = document.getElementById("content");
 let mountLoginComponent = () => {
   pane.innerHTML = `
   <div id="login-container">
-        <form action="" class="login-form">
+        <form action="" class="login-form" onsubmit="login(event)" >
         <h3 class="label">Login</h3>
           <div class="">
             <input
@@ -43,6 +43,20 @@ let mountLoginComponent = () => {
               placeholder="Enter your password"
             />
           </div>
+          
+      <select required name="user-type" id="" class="input selection">
+      <option>
+      </option>
+      <option value="patient">
+          Patient
+      </option>
+      <option value="employee">
+          Employee
+      </option>
+      <option value="visitor">
+          Visitor
+      </option>
+  </select>
           <input type="submit" class="long-btn" value="Login" />
           <p id="forgot-pass">Forgot Password?</p>
           <h3 class="error">Incorrect credentials</h3>
