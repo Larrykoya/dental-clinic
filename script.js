@@ -1,22 +1,4 @@
 let pane = document.getElementById("content");
-//crypto.randomUUID()
-// const dataToSend = { key: "value" };
-// fetch("index.php", {
-//   method: "POST",
-//   body: JSON.stringify(dataToSend),
-//   headers: {
-//     "Content-Type": "application/json",
-//   },
-// })
-//   .then((response) => {
-//     return response.json();
-//   })
-//   .then((data) => {
-//     console.log(data);
-//   })
-//   .catch((error) => {
-//     console.error("Error:", error);
-//   });
 
 let mountLoginComponent = () => {
   pane.innerHTML = `
@@ -108,7 +90,7 @@ const mountSignupComponent = () => {
 let mountSearchComponent = () => {
   pane.innerHTML = `<div id="search-container">
   <h2 class="label">Search User</h2>
-  <form action="" method="">
+  <form action="" method="" onsubmit="">
   <input
   type="text"
   class="input"
@@ -143,7 +125,7 @@ let mountServicesComponent = () => {
 };
 let mountAddServiceComponent = () => {
   pane.innerHTML = `<div id="add-service-container">
-  <form action="" class="">
+  <form action="" class="" onsubmit="signup(event)">
     <h3 class="label">Add Service</h3>
     <div class="">
       <input
@@ -190,7 +172,7 @@ let mountBranchComponent = () => {
 };
 let mountAddBranchComponent = () => {
   pane.innerHTML = `<div id="add-branch-container">
-  <form action="" class="">
+  <form action="" class="" onsubmit="">
     <h3 class="label">Add New Branch</h3>
     <div class="">
       <input
@@ -233,7 +215,7 @@ let mountDepartmentsComponent = () => {
 };
 let mountAddDeptComponent = () => {
   pane.innerHTML = `<div id="add-department-container">
-  <form action="" class="">
+  <form action="" class="" onsubmit="">
     <h3 class="label">Add New Department</h3>
     <div class="">
       <input
@@ -251,7 +233,7 @@ let mountAddDeptComponent = () => {
 };
 let addRole = () => {
   pane.innerHTML = `<div id="add-role-container">
-  <form action="" class="">
+  <form action="" class="" onsubmit="">
     <h3 class="label">Add New Role</h3>
     <div class="">
       <input
@@ -305,7 +287,7 @@ let mountEquipmentsComponent = () => {
 };
 let mountAddEquipmentComponent = () => {
   pane.innerHTML = `<div id="add-equipment-container">
-  <form action="" class="">
+  <form action="" class="" onsubmit="">
     <h3 class="label">Add New Equipment</h3>
     <div>
       <input
@@ -346,7 +328,7 @@ let mountReportsComponent = () => {
 let createMedicalReport = () => {
   pane.innerHTML = `
   <div id="create-report-container">
-    <form action="" class="">
+    <form action="" class="" onsubmit="">
       <h3 class="label">Create Medical Report</h3>
       <textarea
         name="medical-report"
@@ -403,7 +385,7 @@ let mountAppointmentComponent = () => {
 };
 let mountSetAppointment = () => {
   pane.innerHTML = `<div id="create-appointment-container">
-  <form action="">
+  <form action="" onsubmit="">
     <h3 class="label">Make an Appointment</h3>
     <input
       class="input"
@@ -452,7 +434,7 @@ let mountReviewsComponent = () => {
 let mountAddReviewComponent = () => {
   pane.innerHTML = `
   <div id="add-review-container">
-    <form action="">
+    <form action="" onsubmit="">
       <h3 class="label">Add a Review</h3>
       <textarea
         name="user-review"
@@ -471,7 +453,7 @@ let mountPaymentComponent = () => {
   pane.innerHTML = `
   
   <div id="make-payment-container">
-  <form action="" class="">
+  <form action="" class="" onsubmit="">
     <h3 class="label">Payment Information:</h3>
 
     <input
@@ -535,7 +517,7 @@ let mountAnnouncementComponent = () => {
 let mountCreateAnnouncement = () => {
   pane.innerHTML = `
   <div id="announcements-container">
-    <form action="" class="">
+    <form action="" class="" onsubmit="postAnnouncement(event)">
       <h2 class="label">Create New Announcement</h2>
 
       <input
