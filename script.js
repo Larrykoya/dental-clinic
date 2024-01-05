@@ -201,7 +201,7 @@ let mountBranchComponent = () => {
 };
 let mountAddBranchComponent = () => {
   pane.innerHTML = `<div id="add-branch-container">
-  <form action="" class="" onsubmit="">
+  <form action="" class="" onsubmit="createBranch(event)">
     <h3 class="label">Add New Branch</h3>
     <div class="">
       <input

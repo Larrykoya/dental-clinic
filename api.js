@@ -146,7 +146,7 @@ function createBranch(event) {
     }),
   })
     .then((response) => {
-      return response.text();
+      return response.json();
     })
     .then((data) => {
       console.log(data);
