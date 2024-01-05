@@ -1,4 +1,5 @@
 let pane = document.getElementById("content");
+let results = [];
 
 let mountLoginComponent = () => {
   pane.innerHTML = `
@@ -107,25 +108,53 @@ let mountSearchComponent = () => {
 </div>`;
 };
 let mountServicesComponent = () => {
-  pane.innerHTML = `
+  fetch("service.php", {
+    method: "GET",
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      results = data;
+      let content = results.map((result) => {
+        return `<span>
+        <div class="scroll-item">
+        <h3>${result.service_name}</h3>
+        <div>$${result.fee}</div>
+        <div>${result.description}</div>
+        <input id="${result.service_id}" type="button" class="btn" value="Book Now"/>
+        </div>
+        </span>  `;
+      });
+      pane.innerHTML = `
+      <div  class="scroll-container" >
+            <h2 class="label">Our Services:</h2>
+              <div  class="scroll-items" >
+                   ${content.join("")} 
+              </div>
+              
+      </div>`;
+    })
+    .catch((err) => {
+      console.log(err);
+
+      pane.innerHTML = `
   <div  class="scroll-container">
-        <h2 class="label">Our Services</h2>
+        <h2 class="label">Our Services:</h2>
           <div id="services"  class="scroll-items" >
           <span>
           <div class="scroll-item">
-          <h3>service 1</h3>
-          <div>$900</div>
-          <div>description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non luctus nulla</div>
-          <input type="button" class="btn" value="Book Now"/>
+          <h3>Sorry, Unable to display services. Kindly contact support.</h3>
           </div>
           </span>         
           </div>
           
   </div>`;
+    });
 };
 let mountAddServiceComponent = () => {
   pane.innerHTML = `<div id="add-service-container">
-  <form action="" class="" onsubmit="addService(event)">
+  <form action="" class="" onsubmit="createService(event)">
     <h3 class="label">Add Service</h3>
     <div class="">
       <input

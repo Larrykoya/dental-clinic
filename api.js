@@ -98,7 +98,7 @@ function createRole(event) {
     })
     .catch((err) => console.log(err));
 }
-function addService(event) {
+function createService(event) {
   event.preventDefault();
   let id = crypto.randomUUID();
   let name = event.target[0].value;
@@ -123,6 +123,30 @@ function addService(event) {
       //   }
       return response.text();
       //   JSON.parse(response);
+    })
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((err) => console.log(err));
+}
+function createBranch(event) {
+  event.preventDefault();
+  let id = crypto.randomUUID();
+  let name = event.target[0].value;
+  let address = event.target[1].value;
+  fetch("branch.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id,
+      name,
+      address,
+    }),
+  })
+    .then((response) => {
+      return response.text();
     })
     .then((data) => {
       console.log(data);

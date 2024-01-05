@@ -23,12 +23,11 @@ $input = json_decode(file_get_contents('php://input'), true);
 
 $id = $input['id'];
 $name = $input['name'];
-$serviceDescription = $input['serviceDescription'];
-$serviceFee = $input['serviceFee'];
+$address = $input['address'];
 
 try {
-    $insert_query = "INSERT INTO services VALUES('$id','$name','$serviceDescription','$serviceFee')";
-    $success = mysqli_query($conn,$insert_query);
+    $query = "INSERT INTO branches VALUES('$id','$name','$address','$serviceFee')";
+    $success = mysqli_query($conn,$query);
   } catch (mysqli_sql_exception $e) {
     echo json_encode(array("message"=>$e));
   }
@@ -41,22 +40,20 @@ if ($success) {
 }
 if ($_SERVER['REQUEST_METHOD'] === 'GET'){
     try {
-        $query = "SELECT * FROM services";
+        $query = "SELECT * FROM branches";
         $result = mysqli_query($conn,$query);
       } catch (mysqli_sql_exception $e) {
         echo json_encode(array("message"=>$e));
       }
     // Sending response 
     if ($result) {
-        // echo "services fetched successfully";
-        // Initialize an array to hold fetched rows as associative arrays
-        $servicesArray = array();
+        $arr = array();
         // Fetch rows and convert each row into an associative array
         while ($row = mysqli_fetch_assoc($result)) {
-            $servicesArray[] = $row;
+            $arr[] = $row;
         }
         // Send a response back to JavaScript with fetched data
-        echo json_encode($servicesArray);
+        echo json_encode($arr);
     }else{
         echo json_encode(array("message"=>"request process failed"));
     }
