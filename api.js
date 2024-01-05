@@ -69,3 +69,92 @@ function login(event) {
     })
     .catch((err) => console.log(err));
 }
+function createRole(event) {
+  event.preventDefault();
+  let id = crypto.randomUUID();
+  let title = event.target[0].value;
+  let jobDescription = event.target[1].value;
+  fetch("role.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id,
+      title,
+      jobDescription,
+    }),
+  })
+    .then((response) => {
+      //   if (response) {
+      //   } else {
+      //     return response.json();
+      //   }
+      return response.text();
+      //   JSON.parse(response);
+    })
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((err) => console.log(err));
+}
+function addService(event) {
+  event.preventDefault();
+  let id = crypto.randomUUID();
+  let name = event.target[0].value;
+  let serviceDescription = event.target[1].value;
+  let serviceFee = event.target[2].value;
+  fetch("service.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id,
+      name,
+      serviceDescription,
+      serviceFee,
+    }),
+  })
+    .then((response) => {
+      //   if (response) {
+      //   } else {
+      //     return response.json();
+      //   }
+      return response.text();
+      //   JSON.parse(response);
+    })
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((err) => console.log(err));
+}
+function postAnnouncement(event) {
+  event.preventDefault();
+  let id = crypto.randomUUID();
+  let title = event.target[0].value;
+  let announcement = event.target[1].value;
+  fetch("announcement.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id,
+      title,
+      announcement,
+    }),
+  })
+    .then((response) => {
+      //   if (response) {
+      //   } else {
+      //     return response.json();
+      //   }
+      return response.text();
+      //   JSON.parse(response);
+    })
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((err) => console.log(err));
+}

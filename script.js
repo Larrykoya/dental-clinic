@@ -125,7 +125,7 @@ let mountServicesComponent = () => {
 };
 let mountAddServiceComponent = () => {
   pane.innerHTML = `<div id="add-service-container">
-  <form action="" class="" onsubmit="signup(event)">
+  <form action="" class="" onsubmit="addService(event)">
     <h3 class="label">Add Service</h3>
     <div class="">
       <input
@@ -233,7 +233,7 @@ let mountAddDeptComponent = () => {
 };
 let addRole = () => {
   pane.innerHTML = `<div id="add-role-container">
-  <form action="" class="" onsubmit="">
+  <form action="" class="" onsubmit="createRole(event)">
     <h3 class="label">Add New Role</h3>
     <div class="">
       <input
@@ -252,16 +252,6 @@ let addRole = () => {
         name="job-desc"
         id=""
         placeholder="Enter Job Description..."
-        required
-      />
-    </div>
-    <div class="">
-      <input
-        class="input"
-        type="number"
-        name="salary"
-        id=""
-        placeholder="Enter Role Salary..."
         required
       />
     </div>

@@ -18,8 +18,8 @@ try {
 
 // Handle the incoming request from JavaScript
 $input = json_decode(file_get_contents('php://input'), true);
-$id = $input['id'];
-$firstname = $input['firstname'];
+    $id = $input['id'];
+    $firstname = $input['firstname'];
       $lastname = $input['lastname'];
       $email = $input['email'];
       $phone = $input['phone'];
