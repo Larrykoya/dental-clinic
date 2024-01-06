@@ -153,6 +153,54 @@ function createBranch(event) {
     })
     .catch((err) => console.log(err));
 }
+function createReview(event) {
+  event.preventDefault();
+  let id = crypto.randomUUID();
+  let username = event.target[0].value;
+  let content = event.target[1].value;
+  fetch("branch.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id,
+      username,
+      content,
+    }),
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((err) => console.log(err));
+}
+function createPayment(event) {
+  event.preventDefault();
+  let id = crypto.randomUUID();
+  let username = event.target[0].value;
+  let content = event.target[1].value;
+  fetch("branch.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id,
+      username,
+      content,
+    }),
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((err) => console.log(err));
+}
 function postAnnouncement(event) {
   event.preventDefault();
   let id = crypto.randomUUID();

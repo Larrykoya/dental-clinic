@@ -22,11 +22,11 @@ $input = json_decode(file_get_contents('php://input'), true);
 
 
 $id = $input['id'];
-$name = $input['name'];
-$address = $input['address'];
+$username = $input['username'];
+$content = $input['content'];
 
 try {
-    $query = "INSERT INTO branches VALUES('$id','$name','$address')";
+    $query = "INSERT INTO branches VALUES('$id','$username','$content')";
     $success = mysqli_query($conn,$query);
   } catch (mysqli_sql_exception $e) {
     echo json_encode(array("message"=>$e));
@@ -40,7 +40,7 @@ if ($success) {
 }
 if ($_SERVER['REQUEST_METHOD'] === 'GET'){
     try {
-        $query = "SELECT * FROM branches";
+        $query = "SELECT * FROM reviews";
         $result = mysqli_query($conn,$query);
       } catch (mysqli_sql_exception $e) {
         echo json_encode(array("message"=>$e));

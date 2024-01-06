@@ -90,12 +90,12 @@ const mountSignupComponent = () => {
 };
 let mountSearchComponent = () => {
   pane.innerHTML = `<div id="search-container">
-  <h2 class="label">Search User</h2>
+  <h2 class="label">Find Patient</h2>
   <form action="" method="" onsubmit="">
   <input
   type="text"
   class="input"
-  placeholder="Enter email of the user..."
+  placeholder="Enter email of the patient..."
   required
 />
 <button type="submit" class="long-btn">Search</button>
@@ -188,16 +188,39 @@ let mountAddServiceComponent = () => {
 </div>`;
 };
 let mountBranchComponent = () => {
-  pane.innerHTML = `<div id="branches-container">
-  <h3 class="label">Our Branches</h3>
-  <div class="services-list flex">
-    <div id="branches">
-      <h3>branch 1</h3>
-      <h3>branch 2</h3>
-      <h3>branch 3</h3>
-    </div>
-    </div>
-</div>`;
+  fetch("branch.php", {
+    method: "GET",
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      results = data;
+      let content = results.map((result) => {
+        return `
+        <div id="${result.branch_id}">
+          <h3>${result.branch_name}</h3>
+          <p>${result.address}</p>
+        </div>`;
+      });
+      pane.innerHTML = `<div id="branches-container">
+      <h3 class="label">Our Branches:</h3>
+      <div class=" flex">
+      ${content.join("")}
+        </div>
+    </div>`;
+    })
+    .catch((err) => {
+      console.log(err);
+
+      pane.innerHTML = `<div id="branches-container">
+      <h3 class="label">Our Branches:</h3>
+      <div class=" flex">
+        <div id="">
+        <p>Unable to display, please retry later</p>
+        </div>
+    </div>`;
+    });
 };
 let mountAddBranchComponent = () => {
   pane.innerHTML = `<div id="add-branch-container">
@@ -435,26 +458,61 @@ let mountSetAppointment = () => {
 </div>`;
 };
 let mountReviewsComponent = () => {
-  pane.innerHTML = `<div id="reviews-container">
-  <div style="justify-content: space-between" class="flex">
-    <h3 class="label">User Reviews</h3>
-    <button onclick="mountAddReviewComponent()" class="btn review-btn">
-      Add Review
-    </button>
-  </div>
-  <div id="reviews">
-    <div>
-      <h3>user name</h3>
-      <p>review content</p>
-    </div>
-  </div>
-</div>`;
+  fetch("review.php", {
+    method: "GET",
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      results = data;
+      let content = results.map((result) => {
+        return `
+        <div id="${result.review_id}">
+      <h3>${result.username}</h3>
+      <p>${result.content}</p>
+    </div>`;
+      });
+      pane.innerHTML = `<div id="reviews-container">
+      <div style="justify-content: space-between" class="flex">
+        <h3 class="label">User Reviews</h3>
+        <button onclick="mountAddReviewComponent()" class="btn review-btn">
+          Add Review
+        </button>
+      </div>
+      <div id="reviews">
+      ${content.join("")}
+      </div>
+    </div>`;
+    })
+    .catch((err) => {
+      console.log(err);
+
+      pane.innerHTML = `<div id="reviews-container">
+      <div style="justify-content: space-between" class="flex">
+        <h3 class="label">User Reviews</h3>
+        <button onclick="mountAddReviewComponent()" class="btn review-btn">
+          Add Review
+        </button>
+      </div>
+      <div id="reviews">
+          <h3>No reviews yet...</h3>
+      </div>
+    </div>`;
+    });
 };
 let mountAddReviewComponent = () => {
   pane.innerHTML = `
   <div id="add-review-container">
     <form action="" onsubmit="">
       <h3 class="label">Add a Review</h3>
+      <input
+        class="input"
+        type="text"
+        name="username"
+        id=""
+        placeholder="Enter Your Name..."
+      />
       <textarea
         name="user-review"
         id="user-review"
