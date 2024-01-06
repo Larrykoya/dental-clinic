@@ -9,36 +9,21 @@ $dbname = "dental_clinic_db";
 //database connection 
 try {
     $conn = mysqli_connect($servername, $dbusername, $dbpassword, $dbname);
+    
+        // echo "Database Connected Successfully!";
 } catch (mysqli_sql_exception $e) {
     echo json_encode(array("message"=>"connection failed: " . mysqli_connect_error()));
        }
 
 // Checking request method
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){
-// Handle the incoming request from JavaScript
-$input = json_decode(file_get_contents('php://input'), true);
-
-
-$id = $input['id'];
-$username = $input['username'];
-$content = $input['content'];
-
-try {
-    $query = "INSERT INTO branches VALUES('$id','$username','$content')";
-    $success = mysqli_query($conn,$query);
-  } catch (mysqli_sql_exception $e) {
-    echo json_encode(array("message"=>$e));
-  }
-// Sending response 
-if ($success) {
-    echo json_encode(array("message"=>"request successfully processed"));
-}else{
-    echo json_encode(array("message"=>"request process failed"));
-}
-}
-if ($_SERVER['REQUEST_METHOD'] === 'GET'){
+    // Handle the incoming request from JavaScript
+    $input = json_decode(file_get_contents('php://input'), true);
+    
+    
+    $searchKey = $input['searchKey'];
     try {
-        $query = "SELECT * FROM reviews";
+        $query = "SELECT * FROM patients WHERE email LIKE '%$searchKey%' OR LOWER(firstname) LIKE '%$searchKey%' OR LOWER(lastname) LIKE '%$searchKey%'";
         $result = mysqli_query($conn,$query);
       } catch (mysqli_sql_exception $e) {
         echo json_encode(array("message"=>$e));

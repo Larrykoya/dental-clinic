@@ -3,7 +3,7 @@ function signup(event) {
   let id = crypto.randomUUID();
   let firstname = event.target[0].value;
   let lastname = event.target[1].value;
-  let email = event.target[2].value;
+  let email = event.target[2].value.toLowerCase();
   let phone = event.target[3].value;
   let password = event.target[4].value;
   let gender = event.target[5].checked
@@ -57,15 +57,10 @@ function login(event) {
     }),
   })
     .then((response) => {
-      //   if (response) {
-      //   } else {
-      //     return response.json();
-      //   }
-      return response.text();
-      //   JSON.parse(response);
+      return response.json();
     })
     .then((data) => {
-      console.log(data);
+      console.log(typeof data);
     })
     .catch((err) => console.log(err));
 }
@@ -158,7 +153,7 @@ function createReview(event) {
   let id = crypto.randomUUID();
   let username = event.target[0].value;
   let content = event.target[1].value;
-  fetch("branch.php", {
+  fetch("review.php", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -174,6 +169,33 @@ function createReview(event) {
     })
     .then((data) => {
       console.log(data);
+      mountReviewsComponent();
+    })
+    .catch((err) => console.log(err));
+}
+function postReport(event) {
+  event.preventDefault();
+  let report_id = crypto.randomUUID();
+  let patient_id = event.target.id;
+  //   let employee_id = ;
+  let message = event.target[0].value;
+  fetch("review.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id,
+      username,
+      content,
+    }),
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+      mountReviewsComponent();
     })
     .catch((err) => console.log(err));
 }

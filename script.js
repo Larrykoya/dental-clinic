@@ -11,7 +11,6 @@ let mountLoginComponent = () => {
               class="input"
               type="email"
               name="email"
-              id=""
               placeholder="Enter your email"
               required
             />
@@ -21,13 +20,12 @@ let mountLoginComponent = () => {
               class="input"
               type="password"
               name="password"
-              id=""
               required
               placeholder="Enter your password"
             />
           </div>
           
-      <select required name="user-type" id="" class="input selection">
+      <select required name="user-type" class="input selection">
       <option>
       </option>
       <option value="patient">
@@ -91,22 +89,101 @@ const mountSignupComponent = () => {
 let mountSearchComponent = () => {
   pane.innerHTML = `<div id="search-container">
   <h2 class="label">Find Patient</h2>
-  <form action="" method="" onsubmit="">
+  <form action="" method="" onsubmit="postSearch(event)">
   <input
   type="text"
   class="input"
-  placeholder="Enter email of the patient..."
+  placeholder="Enter email, firstname or lastname of the patient..."
   required
 />
 <button type="submit" class="long-btn">Search</button>
   </form>
-  <div id="search-result">
-    <h3>result1</h3>
-    <h3>result2</h3>
-    <h3>result3</h3>
-  </div>
 </div>`;
 };
+function postSearch(event) {
+  event.preventDefault();
+  let searchKey = event.target[0].value.toLowerCase();
+  fetch("search.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      searchKey,
+    }),
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      results = data;
+      let content = results.map((result) => {
+        return `<span>
+        <div class="scroll-item" id="${result.patient_id}">
+        <h3>${result.firstname}</h3>
+        <h3>${result.lastname}</h3>
+        <p>${result.gender}</p>
+        <p>${result.email}</p>
+        <p>${result.phone}</p>
+        <input id="${result.patient_id}" onclick="createMedicalReport(event)" type="button" class="btn" value="create Report"/>
+        </div>
+        </span>  `;
+      });
+      if (content.length < 1) {
+        content = `<div class="scroll-item">
+        <h3>Sorry, No matching results.</h3>
+        </div>`;
+      }
+      pane.innerHTML = `
+      <div id="search-container">
+  <h2 class="label">Find Patient</h2>
+  <form action="" method="" onsubmit="postSearch(event)">
+  <input
+  type="text"
+  class="input"
+  placeholder="Enter email, firstname or lastname of the patient..."
+  required
+/>
+<button type="submit" class="long-btn">Search</button>
+  </form>
+</div>
+      <div  style="top:47%; left:32%" class="scroll-container" >
+            <h2 class="label">Search result:</h2>
+              <div  class="scroll-items" >
+                   ${content} 
+              </div>
+              
+      </div>`;
+    })
+    .catch((err) => {
+      console.log(err);
+
+      pane.innerHTML = `
+      <div id="search-container">
+  <h2 class="label">Find Patient</h2>
+  <form action="" method="" onsubmit="postSearch(event)">
+  <input
+  type="text"
+  class="input"
+  placeholder="Enter email, firstname or lastname of the patient..."
+  required
+/>
+<button type="submit" class="long-btn">Search</button>
+  </form>
+</div>
+  <div style="top:47%; left:32%" class="scroll-container">
+        <h2 class="label">Search result:</h2>
+          <div  class="scroll-items" >
+          <span>
+          <div class="scroll-item">
+          <h3>Sorry, No matching results.</h3>
+          </div>
+          </span>         
+          </div>
+          
+  </div>`;
+    });
+}
 let mountServicesComponent = () => {
   fetch("service.php", {
     method: "GET",
@@ -197,29 +274,32 @@ let mountBranchComponent = () => {
     .then((data) => {
       results = data;
       let content = results.map((result) => {
-        return `
-        <div id="${result.branch_id}">
-          <h3>${result.branch_name}</h3>
-          <p>${result.address}</p>
-        </div>`;
-      });
-      pane.innerHTML = `<div id="branches-container">
-      <h3 class="label">Our Branches:</h3>
-      <div class=" flex">
-      ${content.join("")}
+        return `<span>
+        <div id="${result.branch_id}" class="scroll-item">
+        <h3>${result.branch_name}</h3>
+        <p>Address: </p>
+        <p>${result.address}</p>
         </div>
-    </div>`;
+        </span>  `;
+      });
+      pane.innerHTML = `
+      <div  class="scroll-container" >
+            <h2 class="label">Our Branches:</h2>
+              <div  class="scroll-items" >
+                   ${content.join("")} 
+              </div>
+      </div>`;
     })
     .catch((err) => {
       console.log(err);
 
-      pane.innerHTML = `<div id="branches-container">
-      <h3 class="label">Our Branches:</h3>
-      <div class=" flex">
-        <div id="">
-        <p>Unable to display, please retry later</p>
-        </div>
-    </div>`;
+      pane.innerHTML = `
+      <div  class="scroll-container" >
+            <h2 class="label">Our Branches:</h2>
+              <div  class="scroll-items" >
+              <p>Unable to display, please retry later</p>
+              </div>
+      </div>`;
     });
 };
 let mountAddBranchComponent = () => {
@@ -367,10 +447,10 @@ let mountReportsComponent = () => {
     </div>
   </div>`;
 };
-let createMedicalReport = () => {
+function createMedicalReport(event) {
   pane.innerHTML = `
   <div id="create-report-container">
-    <form action="" class="" onsubmit="">
+    <form action=""  id="${event.target.id}" class="" onsubmit="postReport(event)">
       <h3 class="label">Create Medical Report</h3>
       <textarea
         name="medical-report"
@@ -384,7 +464,7 @@ let createMedicalReport = () => {
       <input type="submit" class="long-btn" value="Submit Report" />
     </form>
   </div>`;
-};
+}
 let mountAppointmentComponent = () => {
   pane.innerHTML = `<div class="scroll-container">
   <h2 class="label">Appointments</h2>
@@ -504,7 +584,7 @@ let mountReviewsComponent = () => {
 let mountAddReviewComponent = () => {
   pane.innerHTML = `
   <div id="add-review-container">
-    <form action="" onsubmit="">
+    <form action="" onsubmit="createReview(event)">
       <h3 class="label">Add a Review</h3>
       <input
         class="input"

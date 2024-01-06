@@ -13,8 +13,8 @@ try {
     
         // echo "Database Connected Successfully!";
 } catch (mysqli_sql_exception $e) {
-    echo("connection failed: " . mysqli_connect_error()."<br>");
-       }
+  echo json_encode(array("message"=>"connection failed: " . mysqli_connect_error()));
+}
 
 // Handle the incoming request from JavaScript
 $input = json_decode(file_get_contents('php://input'), true);
@@ -25,8 +25,8 @@ $input = json_decode(file_get_contents('php://input'), true);
       $users=$user_role."s";
       $user_id = $user_role."_id";
       $correct_password = false;
+      $account_exist=false;
       $result = null;
-      $success = null;
 
 try {
   $select_query = "SELECT $user_id, `password`  FROM $users WHERE email = '$email'";
@@ -42,7 +42,6 @@ try {
       //checking for correct password
       if ($given_password == $password){
         $correct_password = true;
-        echo "login successful!";
       }else{
         $response = "Incorrect credentials! please check login details and try again";
       }
@@ -52,10 +51,16 @@ try {
   } catch (mysqli_sql_exception $e) {
     echo ($e);
   }
-// Send a response back to JavaScript
-if ($success) {
-    echo "user created successfully";
-}
+  if ($account_exist) {
+    if ($correct_password) {
+      echo json_encode(array("message"=>"login successful!", "user_id"=>$_id, "user_role"=>$user_role));
+    }else{
+      echo json_encode(array("message"=>$response));
+    }
+  }else{
+    echo json_encode(array("message"=>$response));
+    }
+
 // echo json_encode($response);
 
 mysqli_close($conn);

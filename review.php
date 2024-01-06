@@ -26,7 +26,7 @@ $username = $input['username'];
 $content = $input['content'];
 
 try {
-    $query = "INSERT INTO branches VALUES('$id','$username','$content')";
+    $query = "INSERT INTO reviews VALUES('$id','$username','$content')";
     $success = mysqli_query($conn,$query);
   } catch (mysqli_sql_exception $e) {
     echo json_encode(array("message"=>$e));
