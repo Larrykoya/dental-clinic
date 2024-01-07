@@ -61,14 +61,18 @@ function login(event) {
     }),
   })
     .then((response) => {
-      return response.text();
+      return response.json();
     })
     .then((data) => {
-      console.log(data);
-      setCookie("id", data.user_id, 0.0625);
-      setCookie("role", data.user_role, 0.0625);
-      authBtn.style.visibility = "hidden";
-      profileBtn.style.visibility = "visible";
+      if (data.success) {
+        setCookie("id", data.user_id, 0.0625);
+        setCookie("role", data.user_role, 0.0625);
+        authBtn.style.visibility = "hidden";
+        profileBtn.style.visibility = "visible";
+      } else {
+        document.getElementById("error").innerHTML = `${data.message}`;
+        document.getElementById("error").style.visibility = "visible";
+      }
     })
     .catch((err) => console.log(err));
 }
@@ -380,6 +384,77 @@ function mountUserProfile() {
     .catch((err) => {
       console.log(err);
     });
+}
+function createEquipment(event) {
+  event.preventDefault();
+  let id = crypto.randomUUID();
+  let name = event.target[0].value;
+  let desc = event.target[1].value;
+  fetch("equipment.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id,
+      name,
+      desc,
+    }),
+  })
+    .then((response) => {
+      return response.text();
+    })
+    .then((data) => {
+      console.log(data);
+      mountEquipmentsComponent();
+    })
+    .catch((err) => console.log(err));
+}
+function createDepartment(event) {
+  event.preventDefault();
+  let id = crypto.randomUUID();
+  let name = event.target[0].value;
+  fetch("department.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id,
+      name,
+    }),
+  })
+    .then((response) => {
+      return response.text();
+    })
+    .then((data) => {
+      console.log(data);
+      mountDepartmentsComponent();
+    })
+    .catch((err) => console.log(err));
+}
+function makeBooking(event) {
+  let id = crypto.randomUUID();
+  let service_id = event.target.id;
+  let patient_id = getCookie("id");
+  fetch("booking.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id,
+      service_id,
+      patient_id,
+    }),
+  })
+    .then((response) => {
+      return response.text();
+    })
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((err) => console.log(err));
 }
 
 let setCookie = (name, value, daysToExpire) => {

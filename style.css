@@ -170,7 +170,7 @@
   border-radius: 10px;
 }
 .login-form {
-  padding: 50px 50px;
+  padding: 30px;
   font-size: 120%;
 }
 #forgot-pass {
@@ -183,9 +183,10 @@
   cursor: pointer;
   color: rgb(70, 70, 70);
 }
-.error {
+#error {
   color: red;
   text-align: center;
+  visibility: hidden;
 }
 
 /* signup page style */

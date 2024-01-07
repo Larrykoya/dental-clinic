@@ -27,6 +27,7 @@ $input = json_decode(file_get_contents('php://input'), true);
       $correct_password = false;
       $account_exist=false;
       $result = null;
+      $success = false;
 
 try {
   $query = "SELECT $user_id, `password`  FROM $users WHERE email = '$email'";
@@ -53,12 +54,13 @@ try {
   }
   if ($account_exist) {
     if ($correct_password) {
-      echo json_encode(array("message"=>"login successful!", "user_id"=>$_id, "user_role"=>$user_role));
+      $success = true;
+      echo json_encode(array("success"=>$success, "user_id"=>$_id, "user_role"=>$user_role));
     }else{
-      echo json_encode(array("message"=>$response));
+      echo json_encode(array("success"=>$success,"message"=>$response));
     }
   }else{
-    echo json_encode(array("message"=>$response));
+    echo json_encode(array("success"=>$success,"message"=>$response));
     }
 
 // echo json_encode($response);

@@ -39,8 +39,7 @@ let mountLoginComponent = () => {
       </option>
   </select>
           <input type="submit" class="long-btn" value="Login" />
-          <p id="forgot-pass">Forgot Password?</p>
-          <h3 class="error">Incorrect credentials</h3>
+          <h3 id="error">Incorrect credentials</h3>
         </form>
       </div>
   `;
@@ -278,7 +277,7 @@ let mountServicesComponent = () => {
         <h3>${result.service_name}</h3>
         <div>$${result.fee}</div>
         <div>${result.description}</div>
-        <input id="${result.service_id}" type="button" class="btn" value="Book Now"/>
+        <input id="${result.service_id}" type="button" onclick="makeBooking(event)" class="btn" value="Book Now"/>
         </div>
         </span>  `;
       });
@@ -410,23 +409,48 @@ let mountAddBranchComponent = () => {
 </div>`;
 };
 let mountDepartmentsComponent = () => {
-  pane.innerHTML = `<div id="departments-container">
+  fetch("department.php", {
+    method: "GET",
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      results = data;
+      let content = results.map((result) => {
+        return `
+        <div>
+        <h3>${result.department_name}</h3>
+      </div>
+        `;
+      });
+      pane.innerHTML = `<div id="departments-container">
   <h3 class="label">Departments</h3>
-  <div class="services-list">
-    <div id="departments">
-      <h3>department 1</h3>
-      <h3>department 2</h3>
-      <h3>department 3</h3>
-    </div>
+  <div>
+    ${content}
     <button onclick="mountAddDeptComponent()" class="long-btn">
       Add New Department
     </button>
   </div>
 </div>`;
+    })
+    .catch((err) => {
+      console.log(err);
+
+      pane.innerHTML = `<div id="departments-container">
+      <h3 class="label">Departments</h3>
+      <div>
+      <h3>Sorry, Unable to display departments.</h3>
+        <button onclick="mountAddDeptComponent()" class="long-btn">
+          Add New Department
+        </button>
+      </div>
+    </div>`;
+    });
 };
 let mountAddDeptComponent = () => {
   pane.innerHTML = `<div id="add-department-container">
-  <form action="" class="" onsubmit="">
+  <form action="" class="" onsubmit="createDepartment(event)">
     <h3 class="label">Add New Department</h3>
     <div class="">
       <input
@@ -471,24 +495,52 @@ let addRole = () => {
 </div>`;
 };
 let mountEquipmentsComponent = () => {
-  pane.innerHTML = `
-  <div id="equipments-container">
-    <h3 class="label">Equipments</h3>
-    <div class="services-list">
-      <div id="equipments">
-        <h3>equipment 1</h3>
-        <h3>equipment 2</h3>
-        <h3>equipment 3</h3>
+  fetch("equipment.php", {
+    method: "GET",
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      results = data;
+      let content = results.map((result) => {
+        return `
+        <div>
+        <h3>${result.name}</h3>
+        <b>Description:</b>
+        <p>${result.description}</p>
       </div>
+        `;
+      });
+      pane.innerHTML = `
+  <div id="equipments-container">
+    <h3 class="label">Equipments: </h3>
+    <div >
+      ${content}
       <button onclick="mountAddEquipmentComponent()" class="long-btn">
         Add New Equipment
       </button>
     </div>
   </div>`;
+    })
+    .catch((err) => {
+      console.log(err);
+
+      pane.innerHTML = `
+  <div id="equipments-container">
+    <h3 class="label">Equipments: </h3>
+    <div >
+    <h3>Sorry, Unable to display equipments.</h3>
+      <button onclick="mountAddEquipmentComponent()" class="long-btn">
+        Add New Equipment
+      </button>
+    </div>
+  </div>`;
+    });
 };
 let mountAddEquipmentComponent = () => {
   pane.innerHTML = `<div id="add-equipment-container">
-  <form action="" class="" onsubmit="">
+  <form action="" class="" onsubmit="createEquipment(event)">
     <h3 class="label">Add New Equipment</h3>
     <div>
       <input
@@ -819,39 +871,43 @@ let mountScheduleVisitComponent = () => {
 </div>`;
 };
 let mountBookings = () => {
-  pane.innerHTML = `<div class="scroll-container">
+  fetch("booking.php", {
+    method: "GET",
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      results = data;
+      let content = results.map((result) => {
+        return `
+        <span>
+      <div class="scroll-item">
+        <h3>${result.email}</h3>
+        <p>${result.service_name}</p>
+        <small>${result.date}</small>
+        <button id="${result.booking_id}" onclick="mountSetAppointment(event)" class="btn">
+          Prepare Appointment
+        </button>
+      </div>
+    </span>
+        `;
+      });
+      pane.innerHTML = `<div class="scroll-container">
   <h2 class="label">Bookings</h2>
   <div id="bookings" class="scroll-items">
-    <span>
-      <div class="scroll-item">
-        <h3>Patient Name</h3>
-        <p>Service Lorem ipsum dolor sit amet, consectetur adipiscing</p>
-        <p>date</p>
-        <button onclick="mountSetAppointment()" class="btn">
-          Prepare Appointment
-        </button>
-      </div>
-    </span>
-    <span>
-      <div class="scroll-item">
-        <h3>Patient Name</h3>
-        <p>Service Lorem ipsum dolor sit amet, consectetur adipiscing</p>
-        <p>date</p>
-        <button onclick="mountSetAppointment()" class="btn">
-          Prepare Appointment
-        </button>
-      </div>
-    </span>
-    <span>
-      <div class="scroll-item">
-        <h3>Patient Name</h3>
-        <p>Service Lorem ipsum dolor sit amet, consectetur adipiscing</p>
-        <p>date</p>
-        <button onclick="mountSetAppointment()" class="btn">
-          Prepare Appointment
-        </button>
-      </div>
-    </span>
+    ${content}
   </div>
 </div>`;
+    })
+    .catch((err) => {
+      console.log(err);
+
+      pane.innerHTML = `<div class="scroll-container">
+      <h2 class="label">Bookings</h2>
+      <div id="bookings" class="scroll-items">
+      <h3>Sorry, Unable to display bookings.</h3>
+      </div>
+    </div>`;
+    });
 };
