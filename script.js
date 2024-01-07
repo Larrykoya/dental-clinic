@@ -86,6 +86,85 @@ const mountSignupComponent = () => {
 
 </div>`;
 };
+function mountUserProfile(event) {
+  event.preventDefault();
+  let id = getCookie("id");
+  let role = getCookie("role");
+  fetch("update.php", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id,
+      role,
+    }),
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      let content = `<form action="" class="signup-form" onsubmit="updateUserProfile(event)">
+      <h3 class="label">Update Your Profile</h3>
+      <label class="update-label" for="">Firstname</label>
+      <input
+        class="input"
+        style="margin: 0"
+        value="${data.firstname}"
+        type="text"
+        name="fname"
+      />
+      <label class="update-label" for="">Lastname</label>
+      <input
+        class="input"
+        style="margin: 0"
+        value="${data.lastname}"
+        type="text"
+        name="lname"
+      />
+      <label class="update-label" for="">Email</label>
+      <input
+        class="input"
+        style="margin: 0"
+        readonly
+        value="${data.email}"
+        type="email"
+        name="email"
+      />
+      <label class="update-label" for="">Address</label>
+      <input
+        class="input"
+        style="margin: 0"
+        value="${data.address}"
+        type="text"
+        name="address"
+      />
+      <label class="update-label" for="">Phone</label>
+      <input
+        class="input"
+        style="margin: 0"
+        value="${data.phone}"
+        type="text"
+        name="phone"
+      />
+      <label class="update-label" for="">Date of Birth</label>
+      <input
+        class="input"
+        style="margin: 0"
+        value="${data.dob}"
+        type="date"
+        name="dob"
+      />
+
+      <input type="submit" class="long-btn" value="Update Profile" />
+    </form>`;
+      pane.innerHTML = `
+      <div id="signup-container">
+        ${content}
+      </div>
+      `;
+    });
+}
 let mountSearchComponent = () => {
   pane.innerHTML = `<div id="search-container">
   <h2 class="label">Find Patient</h2>
@@ -610,7 +689,7 @@ let mountPaymentComponent = () => {
   pane.innerHTML = `
   
   <div id="make-payment-container">
-  <form action="" class="" onsubmit="">
+  <form action="" class="" onsubmit="createPayment(event)">
     <h3 class="label">Payment Information:</h3>
 
     <input
@@ -656,20 +735,43 @@ let mountPaymentComponent = () => {
 </div>`;
 };
 let mountAnnouncementComponent = () => {
-  pane.innerHTML = `
+  fetch("announcement.php", {
+    method: "GET",
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      results = data;
+      let content = results.map((result) => {
+        return `<div class="announcement">
+        <h2>${result.title}</h2>
+        <p>
+        ${result.message}
+        </p>
+        <small>${result.date}</small>
+      </div>`;
+      });
+      pane.innerHTML = `
+      <div id="announcements-container">
+      <h3 class="label">Announcements</h3>
+      <div id="announcements">
+        ${content.join("")}
+      </div>
+    </div>
+      `;
+    })
+    .catch((err) => {
+      console.log(err);
+
+      pane.innerHTML = `
   <div id="announcements-container">
   <h3 class="label">Announcements</h3>
   <div id="announcements">
-    <div class="announcement">
-      <h3>Title</h3>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non
-        luctus nulla.
-      </p>
-    </div>
+  <h3>Sorry, Unable to display announcements.</h3>
   </div>
-</div>
-  `;
+</div>`;
+    });
 };
 let mountCreateAnnouncement = () => {
   pane.innerHTML = `
@@ -753,28 +855,3 @@ let mountBookings = () => {
   </div>
 </div>`;
 };
-// setCookie("name", "alice", 0.0625);
-
-// let setCookie = (name, value, daysToExpire) => {
-//   const date = new Date();
-//   date.setTime(date.getTime() + daysToExpire * 24 * 60 * 60 * 1000);
-//   const expires = "expires=" + date.toUTCString();
-//   document.cookie = name + "=" + value + ";" + expires + ";path=/";
-// };
-// console.log(getCookie("name"));
-// let getCookie = (name) => {
-//   const cookieName = name + "=";
-//   const decodedCookie = decodeURIComponent(document.cookie);
-//   const cookieArray = decodedCookie.split(";");
-
-//   for (let i = 0; i < cookieArray.length; i++) {
-//     let cookie = cookieArray[i];
-//     while (cookie.charAt(0) === " ") {
-//       cookie = cookie.substring(1);
-//     }
-//     if (cookie.indexOf(cookieName) === 0) {
-//       return cookie.substring(cookieName.length, cookie.length);
-//     }
-//   }
-//   return "";
-// };

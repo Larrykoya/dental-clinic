@@ -1,6 +1,5 @@
 <?php
 
-
 //database variables
 $servername = "localhost";
 $dbusername = "root";
@@ -11,37 +10,59 @@ $dbname = "dental_clinic_db";
 try {
     $conn = mysqli_connect($servername, $dbusername, $dbpassword, $dbname);
     
-        echo "Database Connected Successfully!";
+        // echo json_encode(array("message"=>"Database Connected Successfully!"));
 } catch (mysqli_sql_exception $e) {
-    echo("connection failed: " . mysqli_connect_error()."<br>");
+    echo json_encode(array("message"=>"connection failed: " . mysqli_connect_error()));
        }
 
+// Checking request method
+if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 // Handle the incoming request from JavaScript
 $input = json_decode(file_get_contents('php://input'), true);
+
+
 $id = $input['id'];
-$firstname = $input['firstname'];
-      $lastname = $input['lastname'];
-      $email = $input['email'];
-      $phone = $input['phone'];
-      $password = $input['password'];
-      $gender = $input['gender'];
-      $users=$input['role']."s";
-      $user_id = $input['role']."_id";
-      $success = null;
+$employee_id = $input['employee_id'];
+$title = $input['title'];
+$message = $input['message'];
+$success = null;
 
 try {
-    $insert_query = "INSERT INTO $users($user_id,firstname,lastname,email,phone,password,gender) VALUES('$id','$firstname','$lastname','$email','$phone','$password','$gender')";
-    $success = mysqli_query($conn,$insert_query);
+    $query = "INSERT INTO announcements VALUES('$id','$employee_id','$title','$message')";
+    $success = mysqli_query($conn,$query);
   } catch (mysqli_sql_exception $e) {
-    echo ($e);
-    //checking for duplicate username error
-    // $duplicate = stristr($e,"Duplicate");
+    echo json_encode(array("message"=>$e));
   }
-// Send a response back to JavaScript
+// Sending response 
 if ($success) {
-    echo "user created successfully";
+    echo json_encode(array("message"=>"request successfully processed"));
+}else{
+    echo json_encode(array("message"=>"request process failed"));
 }
-// echo json_encode($response);
+}
+if ($_SERVER['REQUEST_METHOD'] === 'GET'){
+  $result = null;
+    try {
+        $query = "SELECT * FROM announcements";
+        $result = mysqli_query($conn,$query);
+      } catch (mysqli_sql_exception $e) {
+        echo json_encode(array("message"=>$e));
+      }
+    // Sending response 
+    if ($result) {
+        $arr = array();
+        // Fetch rows and convert each row into an associative array
+        while ($row = mysqli_fetch_assoc($result)) {
+            $arr[] = $row;
+        }
+        // Send a response back to JavaScript with fetched data
+        echo json_encode($arr);
+    }else{
+        echo json_encode(array("message"=>"request process failed"));
+    }
+}
+
+
 
 mysqli_close($conn);
 ?>

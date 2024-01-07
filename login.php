@@ -11,9 +11,9 @@ $dbname = "dental_clinic_db";
 try {
     $conn = mysqli_connect($servername, $dbusername, $dbpassword, $dbname);
     
-        // echo "Database Connected Successfully!";
+        // echo json_encode(array("message"=>"Database Connected Successfully!"));
 } catch (mysqli_sql_exception $e) {
-  echo json_encode(array("message"=>"connection failed: " . mysqli_connect_error()));
+  // echo json_encode(array("message"=>"connection failed: ".mysqli_connect_error()));
 }
 
 // Handle the incoming request from JavaScript
@@ -29,8 +29,8 @@ $input = json_decode(file_get_contents('php://input'), true);
       $result = null;
 
 try {
-  $select_query = "SELECT $user_id, `password`  FROM $users WHERE email = '$email'";
-  $result = mysqli_query($conn,$select_query);
+  $query = "SELECT $user_id, `password`  FROM $users WHERE email = '$email'";
+  $result = mysqli_query($conn,$query);
   if (mysqli_num_rows($result) > 0) {
     
     $row = mysqli_fetch_assoc($result);
@@ -49,7 +49,7 @@ try {
     $response = "You do not have an account, you need to create an account!";
   }
   } catch (mysqli_sql_exception $e) {
-    echo ($e);
+    echo json_encode(array("message"=>$e));
   }
   if ($account_exist) {
     if ($correct_password) {

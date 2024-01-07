@@ -19,8 +19,8 @@
         <button onclick="mountSignupComponent()" class="btn">SIGN UP</button>
       </div>
       <div id="counter-auth">
-        <button onclick="mountLoginComponent()" class="btn">LOG OUT</button>
-        <button onclick="mountSignupComponent()" class="btn">PROFILE</button>
+        <button onclick="logout()" class="btn">LOG OUT</button>
+        <button onclick="mountUserProfile(event)" class="btn">PROFILE</button>
       </div>
     </div>
 
@@ -78,64 +78,7 @@
         New Announcement
       </button>
     </div>
-    <div id="content">
-      <div id="signup-container">
-        <form action="" class="signup-form" onsubmit="updateUserProfile(event)">
-          <h3 class="label">Update Your Profile</h3>
-          <label class="update-label" for="">Firstname</label>
-          <input
-            class="input"
-            style="margin: 0"
-            value=""
-            type="text"
-            name="fname"
-          />
-          <label class="update-label" for="">Lastname</label>
-          <input
-            class="input"
-            style="margin: 0"
-            value=""
-            type="text"
-            name="lname"
-          />
-          <label class="update-label" for="">Email</label>
-          <input
-            class="input"
-            style="margin: 0"
-            readonly
-            value=""
-            type="email"
-            name="email"
-          />
-          <label class="update-label" for="">Address</label>
-          <input
-            class="input"
-            style="margin: 0"
-            value=""
-            type="text"
-            name="address"
-          />
-          <label class="update-label" for="">Phone</label>
-          <input
-            class="input"
-            style="margin: 0"
-            value=""
-            type="text"
-            name="phone"
-          />
-          <label class="update-label" for="">Date of Birth</label>
-          <input
-            class="input"
-            style="margin: 0"
-            value="2010-01-10"
-            type="date"
-            name="dob"
-          />
-
-          <input type="submit" class="long-btn" value="Update Profile" />
-        </form>
-      </div>
-    </div>
+    <div id="content"></div>
   </body>
   <script src="script.js"></script>
   <script src="api.js"></script>

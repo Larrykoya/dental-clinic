@@ -20,11 +20,14 @@ $input = json_decode(file_get_contents('php://input'), true);
 
 
 $id = $input['id'];
-$username = $input['username'];
-$content = $input['content'];
+$patient_id = $input['patient_id'];
+$details = $input['details'];
+$amount = $input['amount'];
+$method = $input['method'];
+$success = null;
 
 try {
-    $query = "INSERT INTO branches VALUES('$id','$username','$content')";
+    $query = "INSERT INTO payments(payment_id,patient_id,amount,details,payment_method) VALUES('$id','$patient_id', '$amount','$details','$method')";
     $success = mysqli_query($conn,$query);
   } catch (mysqli_sql_exception $e) {
     echo json_encode(array("message"=>$e));

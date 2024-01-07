@@ -1,3 +1,7 @@
+let authBtn = document.getElementById("auth");
+let cpane = document.getElementById("content");
+let profileBtn = document.getElementById("counter-auth");
+
 function signup(event) {
   event.preventDefault();
   let id = crypto.randomUUID();
@@ -57,15 +61,23 @@ function login(event) {
     }),
   })
     .then((response) => {
-      return response.json();
+      return response.text();
     })
     .then((data) => {
       console.log(data);
       setCookie("id", data.user_id, 0.0625);
       setCookie("role", data.user_role, 0.0625);
+      authBtn.style.visibility = "hidden";
+      profileBtn.style.visibility = "visible";
     })
     .catch((err) => console.log(err));
 }
+const logout = () => {
+  deleteCookie("id");
+  deleteCookie("role");
+  authBtn.style.visibility = "visible";
+  profileBtn.style.visibility = "hidden";
+};
 function createRole(event) {
   event.preventDefault();
   let id = crypto.randomUUID();
@@ -170,7 +182,6 @@ function createReview(event) {
       return response.json();
     })
     .then((data) => {
-      console.log(data);
       mountReviewsComponent();
     })
     .catch((err) => console.log(err));
@@ -204,21 +215,25 @@ function postReport(event) {
 function createPayment(event) {
   event.preventDefault();
   let id = crypto.randomUUID();
-  let username = event.target[0].value;
-  let content = event.target[1].value;
-  fetch("branch.php", {
+  let patient_id = getCookie("id");
+  let details = event.target[0].value;
+  let amount = event.target[1].value;
+  let method = event.target[2].value;
+  fetch("payment.php", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
       id,
-      username,
-      content,
+      patient_id,
+      details,
+      amount,
+      method,
     }),
   })
     .then((response) => {
-      return response.json();
+      return response.text();
     })
     .then((data) => {
       console.log(data);
@@ -228,8 +243,10 @@ function createPayment(event) {
 function postAnnouncement(event) {
   event.preventDefault();
   let id = crypto.randomUUID();
+  let employee_id = getCookie("id");
   let title = event.target[0].value;
-  let announcement = event.target[1].value;
+  let message = event.target[1].value;
+  console.log(employee_id);
   fetch("announcement.php", {
     method: "POST",
     headers: {
@@ -237,20 +254,17 @@ function postAnnouncement(event) {
     },
     body: JSON.stringify({
       id,
+      employee_id,
       title,
-      announcement,
+      message,
     }),
   })
     .then((response) => {
-      //   if (response) {
-      //   } else {
-      //     return response.json();
-      //   }
       return response.text();
-      //   JSON.parse(response);
     })
     .then((data) => {
       console.log(data);
+      mountAnnouncementComponent();
     })
     .catch((err) => console.log(err));
 }
@@ -286,6 +300,87 @@ function updateUserProfile(event) {
     })
     .catch((err) => console.log(err));
 }
+function mountUserProfile() {
+  let id = getCookie("id");
+  let role = getCookie("role");
+  fetch("update.php", {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id,
+      role,
+    }),
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      let content = `<form action="" class="signup-form" onsubmit="updateUserProfile(event)">
+        <h3 class="label">Update Your Profile</h3>
+        <label class="update-label" for="">Firstname</label>
+        <input
+          class="input"
+          style="margin: 0"
+          value="${data[0].firstname}"
+          type="text"
+          name="fname"
+        />
+        <label class="update-label" for="">Lastname</label>
+        <input
+          class="input"
+          style="margin: 0"
+          value="${data[0].lastname}"
+          type="text"
+          name="lname"
+        />
+        <label class="update-label" for="">Email</label>
+        <input
+          class="input"
+          style="margin: 0"
+          readonly
+          value="${data[0].email}"
+          type="email"
+          name="email"
+        />
+        <label class="update-label" for="">Address</label>
+        <input
+          class="input"
+          style="margin: 0"
+          value="${data[0].address}"
+          type="text"
+          name="address"
+        />
+        <label class="update-label" for="">Phone</label>
+        <input
+          class="input"
+          style="margin: 0"
+          value="${data[0].phone}"
+          type="text"
+          name="phone"
+        />
+        <label class="update-label" for="">Date of Birth</label>
+        <input
+          class="input"
+          style="margin: 0"
+          value="${data[0].dob}"
+          type="date"
+          name="dob"
+        />
+  
+        <input type="submit" class="long-btn" value="Update Profile" />
+      </form>`;
+      cpane.innerHTML = `
+        <div id="signup-container">
+          ${content}
+        </div>
+        `;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
 
 let setCookie = (name, value, daysToExpire) => {
   const date = new Date();
@@ -308,4 +403,7 @@ let getCookie = (name) => {
     }
   }
   return "";
+};
+let deleteCookie = (name) => {
+  document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 };
