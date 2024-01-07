@@ -254,6 +254,38 @@ function postAnnouncement(event) {
     })
     .catch((err) => console.log(err));
 }
+function updateUserProfile(event) {
+  event.preventDefault();
+  let id = getCookie("id");
+  let role = getCookie("role");
+  let firstname = event.target[0].value;
+  let lastname = event.target[1].value;
+  let address = event.target[3].value;
+  let phone = event.target[4].value;
+  let dob = event.target[5].value;
+  fetch("update.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id,
+      role,
+      firstname,
+      lastname,
+      address,
+      phone,
+      dob,
+    }),
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((err) => console.log(err));
+}
 
 let setCookie = (name, value, daysToExpire) => {
   const date = new Date();
@@ -261,7 +293,6 @@ let setCookie = (name, value, daysToExpire) => {
   const expires = "expires=" + date.toUTCString();
   document.cookie = name + "=" + value + ";" + expires + ";path=/";
 };
-//   console.log(getCookie("name"));
 let getCookie = (name) => {
   const cookieName = name + "=";
   const decodedCookie = decodeURIComponent(document.cookie);
