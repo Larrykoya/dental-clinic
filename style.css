@@ -20,6 +20,11 @@
 #no-deco {
   text-decoration: none;
 }
+#counter-auth {
+  position: absolute;
+  right: 0;
+  visibility: hidden;
+}
 #nav {
   position: absolute;
   top: 93px;
