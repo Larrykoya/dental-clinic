@@ -10,7 +10,7 @@ $dbname = "dental_clinic_db";
 try {
     $conn = mysqli_connect($servername, $dbusername, $dbpassword, $dbname);
     
-        // echo json_encode(array("message"=>"Database Connected Successfully!"));
+        // echo "Database Connected Successfully!";
 } catch (mysqli_sql_exception $e) {
     echo json_encode(array("message"=>"connection failed: " . mysqli_connect_error()));
        }
@@ -23,11 +23,14 @@ $input = json_decode(file_get_contents('php://input'), true);
 
 $id = $input['id'];
 $service_id = $input['service_id'];
+$date = $input['date'];
+$time = $input['time'];
+$employee_id = $input['employee_id'];
 $patient_id = $input['patient_id'];
-$success = null;
+$success=false;
 
 try {
-    $query = "INSERT INTO bookings(booking_id, service_id, patient_id) VALUES('$id','$service_id','$patient_id')";
+    $query = "INSERT INTO appointments VALUES('$id','$service_id','$date','$time','$patient_id','$employee_id')";
     $success = mysqli_query($conn,$query);
   } catch (mysqli_sql_exception $e) {
     echo json_encode(array("message"=>$e));
@@ -40,51 +43,22 @@ if ($success) {
 }
 }
 if ($_SERVER['REQUEST_METHOD'] === 'GET'){
-  $result = null;
-    try {
-        $query = "SELECT 
-        b.booking_id,
-        b.date,
-        p.email,
-        s.service_name
-    FROM 
-        bookings b
-    INNER JOIN 
-        patients p ON b.patient_id = p.patient_id
-    INNER JOIN 
-        services s ON b.service_id = s.service_id";
-        $result = mysqli_query($conn,$query);
-      } catch (mysqli_sql_exception $e) {
-        echo json_encode(array("message"=>$e));
-      }
-    // Sending response 
-    if ($result) {
-        $arr = array();
-        // Fetch rows and convert each row into an associative array
-        while ($row = mysqli_fetch_assoc($result)) {
-            $arr[] = $row;
-        }
-        // Send a response back to JavaScript with fetched data
-        echo json_encode($arr);
-    }else{
-        echo json_encode(array("message"=>"request process failed"));
-    }
-}
-if ($_SERVER['REQUEST_METHOD'] === 'DELETE'){
-    $input = json_decode(file_get_contents('php://input'), true);
-    $booking_id = $input['booking_id'];
     $result = null;
     try {
-    $query = "SELECT 
-        b.service_id,
-        p.patient_id,
-        p.firstname,
-        p.lastname
-    FROM 
-        bookings b
-    INNER JOIN 
-        patients p ON b.patient_id = p.patient_id
-        WHERE b.booking_id = '$booking_id'";
+        $query = "SELECT 
+        a.appointment_id id,
+        p.firstname pfname,
+        p.lastname plname,
+        e.firstname efname,
+        e.lastname elname,
+        a.date,
+        a.time
+         FROM 
+         appointments a
+         INNER JOIN 
+        patients p ON a.patient_id = p.patient_id
+        INNER JOIN 
+        employees e ON a.employee_id = e.employee_id";
         $result = mysqli_query($conn,$query);
       } catch (mysqli_sql_exception $e) {
         echo json_encode(array("message"=>$e));
@@ -102,8 +76,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE'){
         echo json_encode(array("message"=>"request process failed"));
     }
 }
-
-
 
 mysqli_close($conn);
 ?>

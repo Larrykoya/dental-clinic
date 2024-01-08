@@ -31,15 +31,19 @@ function signup(event) {
     }),
   })
     .then((response) => {
-      //   if (response) {
-      //   } else {
-      //     return response.json();
-      //   }
-      return response.text();
-      //   JSON.parse(response);
+      return response.json();
     })
     .then((data) => {
-      console.log(data);
+      if (data.success) {
+        setCookie("id", data.user_id, 0.0625);
+        setCookie("role", data.user_role, 0.0625);
+        authBtn.style.visibility = "hidden";
+        profileBtn.style.visibility = "visible";
+        alert(`Welcome, Signup successful.`);
+        location.reload();
+      } else {
+        alert(`Error: ${data.message}`);
+      }
     })
     .catch((err) => console.log(err));
 }
@@ -69,9 +73,12 @@ function login(event) {
         setCookie("role", data.user_role, 0.0625);
         authBtn.style.visibility = "hidden";
         profileBtn.style.visibility = "visible";
+        alert(`Welcome, Login successful.`);
+        location.reload();
       } else {
-        document.getElementById("error").innerHTML = `${data.message}`;
-        document.getElementById("error").style.visibility = "visible";
+        alert(`Error: ${data.message}`);
+        // document.getElementById("error").innerHTML = `${data.message}`;
+        // document.getElementById("error").style.visibility = "visible";
       }
     })
     .catch((err) => console.log(err));
@@ -456,6 +463,36 @@ function makeBooking(event) {
     })
     .catch((err) => console.log(err));
 }
+function setAppointment(event) {
+  let id = crypto.randomUUID();
+  let service_id = event.target.id;
+  let date = event.target[0].value;
+  let time = event.target[1].value;
+  let employee_id = event.target[2].value;
+  let patient_id = event.target[3].value;
+  fetch("appointment.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id,
+      service_id,
+      date,
+      time,
+      employee_id,
+      patient_id,
+    }),
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+      alert("Appointment set");
+    })
+    .catch((err) => console.log(err));
+}
 
 let setCookie = (name, value, daysToExpire) => {
   const date = new Date();
@@ -481,4 +518,13 @@ let getCookie = (name) => {
 };
 let deleteCookie = (name) => {
   document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+};
+onload = (e) => {
+  if (getCookie("role")) {
+    authBtn.style.visibility = "hidden";
+    profileBtn.style.visibility = "visible";
+  } else {
+    authBtn.style.visibility = "visible";
+    profileBtn.style.visibility = "hidden";
+  }
 };

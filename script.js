@@ -39,7 +39,6 @@ let mountLoginComponent = () => {
       </option>
   </select>
           <input type="submit" class="long-btn" value="Login" />
-          <h3 id="error">Incorrect credentials</h3>
         </form>
       </div>
   `;
@@ -597,77 +596,120 @@ function createMedicalReport(event) {
   </div>`;
 }
 let mountAppointmentComponent = () => {
-  pane.innerHTML = `<div class="scroll-container">
+  fetch("appointment.php", {
+    method: "GET",
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      results = data;
+      let content = results.map((result) => {
+        return `
+        <span>
+      <div class="scroll-item">
+        <h3>${result.pfname} ${result.plname}</h3>
+        <h4>Dr ${result.efname} ${result.elname}</h4>
+        <p>${result.date}</p>
+        <p>${result.time}</p>
+        <input type="button" class="btn" id="${result.id}" value="Cancel" />
+      </div>
+    </span>
+        `;
+      });
+      pane.innerHTML = `<div class="scroll-container">
   <h2 class="label">Appointments</h2>
   <div id="appointments" class="scroll-items">
-    <span>
-      <div class="scroll-item">
-        <h3>Patient Name</h3>
-        <h4>Dr name</h4>
-        <p>Date</p>
-        <p>Time</p>
-        <input type="button" class="btn" value="Cancel" />
-      </div>
-    </span>
-    <span>
-      <div class="scroll-item">
-        <h3>Patient Name</h3>
-        <h4>Dr name</h4>
-        <p>Date</p>
-        <p>Time</p>
-        <input type="button" class="btn" value="Cancel" />
-      </div>
-    </span>
-    <span>
-      <div class="scroll-item">
-        <h3>Patient Name</h3>
-        <h4>Dr name</h4>
-        <p>Date</p>
-        <p>Time</p>
-        <input type="button" class="btn" value="Cancel" />
-      </div>
-    </span>
+    ${content}
   </div>
-  <input
-    type="submit"
-    onclick="mountSetAppointment()"
-    class="long-btn"
-    value="Create New Appointment"
-  />
 </div>`;
-};
-let mountSetAppointment = () => {
-  pane.innerHTML = `<div id="create-appointment-container">
-  <form action="" onsubmit="">
-    <h3 class="label">Make an Appointment</h3>
-    <input
-      class="input"
-      placeholder="Select appointment date..."
-      type="date"
-      name="appointment-date"
-      id=""
-      required
-    />
-    <input
-      class="input"
-      placeholder="Select appointment time..."
-      type="time"
-      name="appointment-time"
-      id=""
-      required
-    />
-    <select required name="dentist" id="" class="input">
-      <option></option>
-      <option value="dentist1">Dentist 1</option>
-    </select>
-    <select required name="patient" id="" class="input">
-      <option></option>
-      <option value="patient">patient 1</option>
-    </select>
-    <input type="submit" class="long-btn" value="Make Appointment" />
-  </form>
+    })
+    .catch((err) => {
+      console.log(err);
+
+      pane.innerHTML = `<div class="scroll-container">
+  <h2 class="label">Appointments</h2>
+  <div id="appointments" class="scroll-items">
+  <h3>Sorry, Unable to display appointments.</h3>
+  </div>
 </div>`;
+    });
 };
+function mountSetAppointment(event) {
+  let booking_data = [];
+  let dentist_data = [];
+  let booking_id = event.target.id;
+  let service_id = null;
+  fetch("booking.php", {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      booking_id,
+    }),
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      booking_data = data[0];
+      service_id = booking_data.service_id;
+      fetch("search.php", {
+        method: "GET",
+      })
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          results = data;
+          dentist_data = results.map((result) => {
+            return `
+            <option value="${result.employee_id}">Dr. ${result.firstname} ${result.lastname}</option>
+            `;
+          });
+          pane.innerHTML = `<div id="create-appointment-container">
+        <form action="" id="${service_id}" onsubmit="setAppointment(event)">
+          <h3 class="label">Make an Appointment</h3>
+          <label class="update-label" for="">Set Date</label>
+          <input
+            class="input"
+            type="date"
+            style="margin: 0"
+            name="appointment-date"
+            id=""
+            required
+          />
+          <label class="update-label" for="">Set Time</label>
+          <input
+            class="input"
+            type="time"
+            style="margin: 0"
+            name="appointment-time"
+            id=""
+            required
+          />
+          <label class="update-label" for="">Select Dentist</label>
+          <select required name="dentist" style="margin: 0" class="input">
+            <option></option>
+            ${dentist_data}
+          </select>
+          <label class="update-label" for="">Patient</label>
+          <select required name="patient" style="margin: 0" class="input">
+            <option value="${booking_data.patient_id}">${booking_data.firstname} ${booking_data.lastname}</option>
+          </select>
+          <input type="submit" class="long-btn" value="Make Appointment" />
+        </form>
+      </div>`;
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
 let mountReviewsComponent = () => {
   fetch("review.php", {
     method: "GET",
@@ -896,7 +938,7 @@ let mountBookings = () => {
       pane.innerHTML = `<div class="scroll-container">
   <h2 class="label">Bookings</h2>
   <div id="bookings" class="scroll-items">
-    ${content}
+    ${content.join("")}
   </div>
 </div>`;
     })

@@ -11,7 +11,7 @@ $dbname = "dental_clinic_db";
 try {
     $conn = mysqli_connect($servername, $dbusername, $dbpassword, $dbname);
     
-        echo json_encode(array("message"=>"Database Connected Successfully!"));
+        // echo json_encode(array("message"=>"Database Connected Successfully!"));
 } catch (mysqli_sql_exception $e) {
     echo json_encode(array("message"=>"connection failed: " . mysqli_connect_error()."<br>"));
        }
@@ -28,7 +28,7 @@ $input = json_decode(file_get_contents('php://input'), true);
       $user_role = $input['role'];
       $users=$user_role."s";
       $user_id = $user_role."_id";
-      $success = null;
+      $success = false;
 
 try {
     $query = "INSERT INTO $users($user_id,firstname,lastname,email,phone,password,gender) VALUES('$id','$firstname','$lastname','$email','$phone','$password','$gender')";
@@ -39,9 +39,9 @@ try {
   }
 // Send a response back to JavaScript
 if ($success) {
-  echo json_encode(array("message"=>"signup successful!", "user_id"=>$id, "user_role"=>$user_role));
+  echo json_encode(array("success"=>$success,"message"=>"signup successful!", "user_id"=>$id, "user_role"=>$user_role));
 }else{
-  echo json_encode(array("message"=>"signup failed!"));
+  echo json_encode(array("success"=>$success,"message"=>"signup failed!"));
 }
 
 mysqli_close($conn);

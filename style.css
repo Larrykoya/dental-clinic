@@ -149,7 +149,7 @@
 .scroll-item {
   padding: 8px;
   width: 200px;
-  height: 200px;
+  height: 180px;
   margin: 10px;
   background-color: rgb(110, 110, 110);
   border-radius: 10px;
@@ -165,12 +165,12 @@
   position: absolute;
   top: 20%;
   left: 35%;
-  width: 30%;
+  width: 28%;
   background-color: #fff;
   border-radius: 10px;
 }
 .login-form {
-  padding: 30px;
+  padding: 30px 40px;
   font-size: 120%;
 }
 #forgot-pass {
@@ -183,12 +183,6 @@
   cursor: pointer;
   color: rgb(70, 70, 70);
 }
-#error {
-  color: red;
-  text-align: center;
-  visibility: hidden;
-}
-
 /* signup page style */
 
 #signup-container {
