@@ -193,6 +193,7 @@ function createReview(event) {
       return response.json();
     })
     .then((data) => {
+      alert(data);
       mountReviewsComponent();
     })
     .catch((err) => console.log(err));
@@ -201,17 +202,18 @@ function postReport(event) {
   event.preventDefault();
   let report_id = crypto.randomUUID();
   let patient_id = event.target.id;
-  //   let employee_id = ;
+  let employee_id = getCookie("id");
   let message = event.target[0].value;
-  fetch("review.php", {
+  fetch("report.php", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      id,
-      username,
-      content,
+      report_id,
+      patient_id,
+      employee_id,
+      message,
     }),
   })
     .then((response) => {
@@ -219,7 +221,8 @@ function postReport(event) {
     })
     .then((data) => {
       console.log(data);
-      mountReviewsComponent();
+      alert(data.message);
+      mountReportsComponent();
     })
     .catch((err) => console.log(err));
 }
@@ -490,6 +493,35 @@ function setAppointment(event) {
     .then((data) => {
       console.log(data);
       alert("Appointment set");
+    })
+    .catch((err) => console.log(err));
+}
+function scheduleVisit(event) {
+  event.preventDefault();
+  let id = crypto.randomUUID();
+  let visitor_id = getCookie("id");
+  let patient_id = event.target[0].value;
+  let date = event.target[1].value;
+  let time = event.target[2].value;
+  fetch("visitLog.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id,
+      visitor_id,
+      patient_id,
+      date,
+      time,
+    }),
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+      alert(data.message);
     })
     .catch((err) => console.log(err));
 }

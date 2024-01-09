@@ -61,6 +61,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET'){
         echo json_encode(array("message"=>"request process failed"));
     }
 }
+if ($_SERVER['REQUEST_METHOD'] === 'DELETE'){
+    try {
+        $query = "SELECT patient_id, firstname, lastname FROM patients";
+        $result = mysqli_query($conn,$query);
+      } catch (mysqli_sql_exception $e) {
+        echo json_encode(array("message"=>$e));
+      }
+    // Sending response 
+    if ($result) {
+        $arr = array();
+        // Fetch rows and convert each row into an associative array
+        while ($row = mysqli_fetch_assoc($result)) {
+            $arr[] = $row;
+        }
+        // Send a response back to JavaScript with fetched data
+        echo json_encode($arr);
+    }else{
+        echo json_encode(array("message"=>"request process failed"));
+    }
+}
 
 
 

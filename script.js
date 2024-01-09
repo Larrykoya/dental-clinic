@@ -197,8 +197,7 @@ function postSearch(event) {
       let content = results.map((result) => {
         return `<span>
         <div class="scroll-item" id="${result.patient_id}">
-        <h3>${result.firstname}</h3>
-        <h3>${result.lastname}</h3>
+        <h3>${result.firstname} ${result.lastname}</h3>
         <p>${result.gender}</p>
         <p>${result.email}</p>
         <p>${result.phone}</p>
@@ -566,16 +565,45 @@ let mountAddEquipmentComponent = () => {
 </div>`;
 };
 let mountReportsComponent = () => {
-  pane.innerHTML = `
+  fetch("report.php", {
+    method: "GET",
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      results = data;
+      let content = results.map((result) => {
+        return `
+        <div>
+        <h3>${result.pfname} ${result.plname}</h3>
+        <p>${result.message}</p>
+        <hr>
+        <small>Report by</small>
+        <h4>Dr ${result.efname} ${result.elname}</h4>
+        <small>${result.date}</small>
+      </div>
+        `;
+      });
+      pane.innerHTML = `
   <div id="reports-container">
     <h3 class="label">Medical Reports</h3>
     <div id="equipments">
-      <h3>User 1</h3>
-      <p>report content</p>
-      <h3>User 2</h3>
-      <p>report content</p>
+      ${content.join("")}
     </div>
   </div>`;
+    })
+    .catch((err) => {
+      console.log(err);
+
+      pane.innerHTML = `
+      <div id="reports-container">
+        <h3 class="label">Medical Reports</h3>
+        <div id="equipments">
+        <h3>Sorry, Unable to load medical reports at the moment.</h3>
+        </div>
+      </div>`;
+    });
 };
 function createMedicalReport(event) {
   pane.innerHTML = `
@@ -895,22 +923,52 @@ let mountCreateAnnouncement = () => {
   </div>`;
 };
 let mountScheduleVisitComponent = () => {
-  pane.innerHTML = `<div id="schedule-visit-container">
-  <form action="">
+  fetch("search.php", {
+    method: "GET",
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      results = data;
+      patient_list = results.map((result) => {
+        return `
+        <option value="${result.patient_id}"> ${result.firstname} ${result.lastname}</option>
+        `;
+      });
+      pane.innerHTML = `<div id="schedule-visit-container">
+  <form action="" onsubmit="scheduleVisit(event)">
     <h3 class="label">Schedule a Visit</h3>
-    <input
-      class="input"
-      type="text"
-      name="patient-name"
-      id=""
-      placeholder="Enter Patient Name..."
-      required
-    />
-    <input class="input" type="date" name="visit-date" id="" required />
-    <input class="input" type="time" name="visit-time" id="" required />
+    <label class="update-label" for="">Select Patient</label>
+      <select required name="dentist" style="margin: 0" class="input">
+        <option></option>
+        ${patient_list}
+      </select>
+      <label class="update-label" for="">Set Date</label>
+      <input
+        class="input"
+        type="date"
+        style="margin: 0"
+        name="visit-date"
+        id=""
+        required
+      />
+      <label class="update-label" for="">Set Time</label>
+      <input
+        class="input"
+        type="time"
+        style="margin: 0"
+        name="visit-time"
+        id=""
+        required
+      />
     <input type="submit" class="long-btn" value="Schedule Visit" />
   </form>
 </div>`;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 let mountBookings = () => {
   fetch("booking.php", {
