@@ -24,17 +24,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $id = $input['id'];
     $title = $input['title'];
     $jobDescription = $input['jobDescription'];
+    $success=false;
     
     try {
         $insert_query = "INSERT INTO roles VALUES('$id','$title','$jobDescription')";
         $success = mysqli_query($conn,$insert_query);
       } catch (mysqli_sql_exception $e) {
-        echo ($e);
+        echo json_encode(array("message"=>$e));
       }
     // Sending response 
-    if ($success) {
-        echo "role created successfully";
-    }
+if ($success) {
+  echo json_encode(array("success"=>$success,"message"=>"role created successfully"));
+}else{
+  echo json_encode(array("message"=>"request process failed"));
+}
     }
     if ($_SERVER['REQUEST_METHOD'] === 'GET'){}
 

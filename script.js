@@ -84,85 +84,6 @@ const mountSignupComponent = () => {
 
 </div>`;
 };
-function mountUserProfile(event) {
-  event.preventDefault();
-  let id = getCookie("id");
-  let role = getCookie("role");
-  fetch("update.php", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      id,
-      role,
-    }),
-  })
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      let content = `<form action="" class="signup-form" onsubmit="updateUserProfile(event)">
-      <h3 class="label">Update Your Profile</h3>
-      <label class="update-label" for="">Firstname</label>
-      <input
-        class="input"
-        style="margin: 0"
-        value="${data.firstname}"
-        type="text"
-        name="fname"
-      />
-      <label class="update-label" for="">Lastname</label>
-      <input
-        class="input"
-        style="margin: 0"
-        value="${data.lastname}"
-        type="text"
-        name="lname"
-      />
-      <label class="update-label" for="">Email</label>
-      <input
-        class="input"
-        style="margin: 0"
-        readonly
-        value="${data.email}"
-        type="email"
-        name="email"
-      />
-      <label class="update-label" for="">Address</label>
-      <input
-        class="input"
-        style="margin: 0"
-        value="${data.address}"
-        type="text"
-        name="address"
-      />
-      <label class="update-label" for="">Phone</label>
-      <input
-        class="input"
-        style="margin: 0"
-        value="${data.phone}"
-        type="text"
-        name="phone"
-      />
-      <label class="update-label" for="">Date of Birth</label>
-      <input
-        class="input"
-        style="margin: 0"
-        value="${data.dob}"
-        type="date"
-        name="dob"
-      />
-
-      <input type="submit" class="long-btn" value="Update Profile" />
-    </form>`;
-      pane.innerHTML = `
-      <div id="signup-container">
-        ${content}
-      </div>
-      `;
-    });
-}
 let mountSearchComponent = () => {
   pane.innerHTML = `<div id="search-container">
   <h2 class="label">Find Patient</h2>
@@ -924,7 +845,7 @@ let mountCreateAnnouncement = () => {
 };
 let mountScheduleVisitComponent = () => {
   fetch("search.php", {
-    method: "GET",
+    method: "DELETE",
   })
     .then((response) => {
       return response.json();

@@ -84,10 +84,15 @@ function login(event) {
     .catch((err) => console.log(err));
 }
 const logout = () => {
-  deleteCookie("id");
-  deleteCookie("role");
-  authBtn.style.visibility = "visible";
-  profileBtn.style.visibility = "hidden";
+  let yes = confirm("are you sure you want to log out?");
+  if (yes) {
+    alert(`Logout successful.`);
+    location.reload();
+    deleteCookie("id");
+    deleteCookie("role");
+    authBtn.style.visibility = "visible";
+    profileBtn.style.visibility = "hidden";
+  }
 };
 function createRole(event) {
   event.preventDefault();
@@ -106,15 +111,16 @@ function createRole(event) {
     }),
   })
     .then((response) => {
-      //   if (response) {
-      //   } else {
-      //     return response.json();
-      //   }
-      return response.text();
-      //   JSON.parse(response);
+      return response.json();
     })
     .then((data) => {
       console.log(data);
+      if (data.success) {
+        alert(data.message);
+        location.reload();
+      } else {
+        alert(data.message);
+      }
     })
     .catch((err) => console.log(err));
 }
@@ -137,15 +143,15 @@ function createService(event) {
     }),
   })
     .then((response) => {
-      //   if (response) {
-      //   } else {
-      //     return response.json();
-      //   }
-      return response.text();
-      //   JSON.parse(response);
+      return response.json();
     })
     .then((data) => {
-      console.log(data);
+      if (data.success) {
+        alert(data.message);
+        location.reload();
+      } else {
+        alert(data.message);
+      }
     })
     .catch((err) => console.log(err));
 }
@@ -170,6 +176,12 @@ function createBranch(event) {
     })
     .then((data) => {
       console.log(data);
+      if (data.success) {
+        alert(data.message);
+        location.reload();
+      } else {
+        alert(data.message);
+      }
     })
     .catch((err) => console.log(err));
 }
@@ -193,8 +205,13 @@ function createReview(event) {
       return response.json();
     })
     .then((data) => {
-      alert(data);
-      mountReviewsComponent();
+      console.log(data);
+      if (data.success) {
+        alert(data.message);
+        mountReviewsComponent();
+      } else {
+        alert(data.message);
+      }
     })
     .catch((err) => console.log(err));
 }
@@ -247,10 +264,16 @@ function createPayment(event) {
     }),
   })
     .then((response) => {
-      return response.text();
+      return response.json();
     })
     .then((data) => {
       console.log(data);
+      if (data.success) {
+        alert(data.message);
+        location.reload();
+      } else {
+        alert(data.message);
+      }
     })
     .catch((err) => console.log(err));
 }
@@ -278,7 +301,12 @@ function postAnnouncement(event) {
     })
     .then((data) => {
       console.log(data);
-      mountAnnouncementComponent();
+      if (data.success) {
+        alert(data.message);
+        mountAnnouncementComponent();
+      } else {
+        alert(data.message);
+      }
     })
     .catch((err) => console.log(err));
 }
@@ -311,6 +339,12 @@ function updateUserProfile(event) {
     })
     .then((data) => {
       console.log(data);
+      if (data.success) {
+        alert(data.message);
+        location.reload();
+      } else {
+        alert(data.message);
+      }
     })
     .catch((err) => console.log(err));
 }
@@ -412,11 +446,16 @@ function createEquipment(event) {
     }),
   })
     .then((response) => {
-      return response.text();
+      return response.json();
     })
     .then((data) => {
       console.log(data);
-      mountEquipmentsComponent();
+      if (data.success) {
+        alert(data.message);
+        mountEquipmentsComponent();
+      } else {
+        alert(data.message);
+      }
     })
     .catch((err) => console.log(err));
 }
@@ -435,11 +474,16 @@ function createDepartment(event) {
     }),
   })
     .then((response) => {
-      return response.text();
+      return response.json();
     })
     .then((data) => {
       console.log(data);
-      mountDepartmentsComponent();
+      if (data.success) {
+        alert(data.message);
+        mountDepartmentsComponent();
+      } else {
+        alert(data.message);
+      }
     })
     .catch((err) => console.log(err));
 }
@@ -459,10 +503,11 @@ function makeBooking(event) {
     }),
   })
     .then((response) => {
-      return response.text();
+      return response.json();
     })
     .then((data) => {
       console.log(data);
+      alert(data.message);
     })
     .catch((err) => console.log(err));
 }
@@ -492,7 +537,12 @@ function setAppointment(event) {
     })
     .then((data) => {
       console.log(data);
-      alert("Appointment set");
+      if (data.success) {
+        alert(data.message);
+        mountBookings();
+      } else {
+        alert(data.message);
+      }
     })
     .catch((err) => console.log(err));
 }
@@ -521,11 +571,15 @@ function scheduleVisit(event) {
     })
     .then((data) => {
       console.log(data);
-      alert(data.message);
+      if (data.success) {
+        alert(data.message);
+        location.reload();
+      } else {
+        alert(data.message);
+      }
     })
     .catch((err) => console.log(err));
 }
-
 let setCookie = (name, value, daysToExpire) => {
   const date = new Date();
   date.setTime(date.getTime() + daysToExpire * 24 * 60 * 60 * 1000);

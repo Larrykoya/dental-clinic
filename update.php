@@ -29,7 +29,7 @@ $dob = $input['dob'];
 $user_role = $input['role'];
 $users=$user_role."s";
 $user_id = $user_role."_id";
-$success = null;
+$success = false;
 
 try {
 $query = "UPDATE $users SET firstname = '$firstname',lastname='$lastname',address='$address',phone='$phone',dob='$dob' WHERE $user_id = '$id'";
@@ -40,7 +40,7 @@ $success = mysqli_query($conn,$query);
 }
 // Send a response back to JavaScript
 if ($success) {
-echo json_encode(array("message"=>"profile update successful!"));
+echo json_encode(array("success"=>$success,"message"=>"profile update successful!"));
 }else{
 echo json_encode(array("message"=>"profile update failed!"));
 }

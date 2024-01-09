@@ -34,7 +34,7 @@ try {
   }
 // Sending response 
 if ($success) {
-    echo json_encode(array("message"=>"request successfully processed"));
+    echo json_encode(array("success"=>$success,"message"=>"payment successful"));
 }else{
     echo json_encode(array("message"=>"request process failed"));
 }

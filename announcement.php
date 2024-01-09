@@ -25,7 +25,7 @@ $id = $input['id'];
 $employee_id = $input['employee_id'];
 $title = $input['title'];
 $message = $input['message'];
-$success = null;
+$success = false;
 
 try {
     $query = "INSERT INTO announcements VALUES('$id','$employee_id','$title','$message')";
@@ -35,9 +35,9 @@ try {
   }
 // Sending response 
 if ($success) {
-    echo json_encode(array("message"=>"request successfully processed"));
+    echo json_encode(array("success"=>$success,"message"=>"announcement posted successfully"));
 }else{
-    echo json_encode(array("message"=>"request process failed"));
+    echo json_encode(array("success"=>$success,"message"=>"request process failed"));
 }
 }
 if ($_SERVER['REQUEST_METHOD'] === 'GET'){

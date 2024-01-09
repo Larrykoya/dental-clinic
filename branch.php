@@ -24,6 +24,7 @@ $input = json_decode(file_get_contents('php://input'), true);
 $id = $input['id'];
 $name = $input['name'];
 $address = $input['address'];
+$success=false;
 
 try {
     $query = "INSERT INTO branches VALUES('$id','$name','$address')";
@@ -33,9 +34,9 @@ try {
   }
 // Sending response 
 if ($success) {
-    echo json_encode(array("message"=>"request successfully processed"));
+    echo json_encode(array("success"=>$success,"message"=>"branch created successfully"));
 }else{
-    echo json_encode(array("message"=>"request process failed"));
+    echo json_encode(array("success"=>$success,"message"=>"request process failed"));
 }
 }
 if ($_SERVER['REQUEST_METHOD'] === 'GET'){

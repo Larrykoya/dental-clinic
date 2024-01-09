@@ -29,14 +29,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $success = false;
     
     try {
-        $insert_query = "INSERT INTO visit_log VALUES('$id','$visitor_id','$patient_id','$date','$time')";
-        $success = mysqli_query($conn,$insert_query);
+        $query = "INSERT INTO visit_logs VALUES('$id','$visitor_id','$patient_id','$date','$time')";
+        $success = mysqli_query($conn,$query);
       } catch (mysqli_sql_exception $e) {
         echo json_encode(array("message"=>$e));
       }
     // Sending response 
     if ($success) {
-        echo json_encode(array("message"=>"Your visit has been successfully for. Date: ".$date." Time: ".$time));
+       echo json_encode(array("success"=>$success,"message"=>"Your visit has been successfully for ".$date." at ".$time));
     }else{
         echo json_encode(array("message"=>"Unable to schedule your visit"));
     }

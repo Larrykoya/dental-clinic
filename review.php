@@ -24,6 +24,7 @@ $input = json_decode(file_get_contents('php://input'), true);
 $id = $input['id'];
 $username = $input['username'];
 $content = $input['content'];
+$success=false;
 
 try {
     $query = "INSERT INTO reviews VALUES('$id','$username','$content')";
@@ -33,7 +34,7 @@ try {
   }
 // Sending response 
 if ($success) {
-    echo json_encode(array("message"=>"request successfully processed"));
+    echo json_encode(array("success"=>$success,"message"=>"review posted successfully"));
 }else{
     echo json_encode(array("message"=>"request process failed"));
 }

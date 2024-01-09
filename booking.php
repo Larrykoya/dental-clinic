@@ -24,7 +24,7 @@ $input = json_decode(file_get_contents('php://input'), true);
 $id = $input['id'];
 $service_id = $input['service_id'];
 $patient_id = $input['patient_id'];
-$success = null;
+$success = false;
 
 try {
     $query = "INSERT INTO bookings(booking_id, service_id, patient_id) VALUES('$id','$service_id','$patient_id')";
@@ -34,9 +34,9 @@ try {
   }
 // Sending response 
 if ($success) {
-    echo json_encode(array("message"=>"request successfully processed"));
+    echo json_encode(array("success"=>$success,"message"=>"you successfully booked this service"));
 }else{
-    echo json_encode(array("message"=>"request process failed"));
+    echo json_encode(array("success"=>$success,"message"=>"request process failed"));
 }
 }
 if ($_SERVER['REQUEST_METHOD'] === 'GET'){
