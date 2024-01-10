@@ -1,6 +1,4 @@
 <?php
-
-
 //database variables
 $servername = "localhost";
 $dbusername = "root";
