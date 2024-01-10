@@ -10,10 +10,9 @@ $dbname = "dental_clinic_db";
 //database connection 
 try {
     $conn = mysqli_connect($servername, $dbusername, $dbpassword, $dbname);
-    
-        // echo json_encode(array("message"=>"Database Connected Successfully!"));
+    // echo json_encode(array("message"=>"Database Connected Successfully!"));
 } catch (mysqli_sql_exception $e) {
-    echo json_encode(array("message"=>"connection failed: " . mysqli_connect_error()."<br>"));
+    echo json_encode(array("message"=>"connection failed: " . mysqli_connect_error()));
        }
 
 // Handle the incoming request from JavaScript
