@@ -147,7 +147,7 @@ function postSearch(event) {
       <div  style="top:47%; left:32%" class="scroll-container" >
             <h2 class="label">Search result:</h2>
               <div  class="scroll-items" >
-                   ${content} 
+                   ${content.join("")} 
               </div>
               
       </div>`;
