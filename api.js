@@ -1,5 +1,8 @@
 let authBtn = document.getElementById("auth");
 let cpane = document.getElementById("content");
+let patientNav = document.getElementById("nav");
+let employeeNav = document.getElementById("admin-nav");
+let visitor = document.getElementById("schedule-visit");
 let profileBtn = document.getElementById("counter-auth");
 
 function signup(event) {
@@ -612,5 +615,36 @@ onload = (e) => {
   } else {
     authBtn.style.visibility = "visible";
     profileBtn.style.visibility = "hidden";
+  }
+  switch (getCookie("role")) {
+    case "employee":
+      {
+        employeeNav.style.visibility = "visible";
+        patientNav.style.visibility = "hidden";
+        visitor.style.visibility = "hidden";
+      }
+      break;
+    case "patient":
+      {
+        patientNav.style.visibility = "visible";
+        employeeNav.style.visibility = "hidden";
+        visitor.style.visibility = "hidden";
+      }
+      break;
+    case "visitor":
+      {
+        visitor.style.visibility = "visible";
+        employeeNav.style.visibility = "hidden";
+        patientNav.style.visibility = "hidden";
+      }
+      break;
+
+    default:
+      {
+        visitor.style.visibility = "hidden";
+        employeeNav.style.visibility = "hidden";
+        patientNav.style.visibility = "hidden";
+      }
+      break;
   }
 };

@@ -4,6 +4,11 @@
   box-sizing: border-box;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
+body {
+  background-image: url(/images/background.jpg);
+  background-size: cover;
+  background-position: right;
+}
 .flex {
   display: flex;
 }
@@ -31,6 +36,7 @@
   width: 235px;
   height: 85.3%;
   background-color: rgb(151, 151, 151);
+  visibility: hidden;
 }
 #admin-nav {
   position: absolute;
@@ -39,6 +45,7 @@
   width: 235px;
   height: 85.3%;
   background-color: rgb(151, 151, 151);
+  visibility: hidden;
 }
 .btn {
   margin: 10px;
@@ -61,9 +68,8 @@
   background-color: rgb(110, 110, 110);
 }
 #content {
-  margin-left: 200px;
   height: 540px;
-  background-color: rgb(110, 110, 110);
+  background-color: rgba(110, 110, 110, 0.7);
 }
 .nav-elements {
   padding: 10px;
@@ -368,21 +374,19 @@
   padding: 20px 50px;
 }
 /* schedule visit */
-.schedule-visit {
-  position: absolute;
-  bottom: 0;
-  left: 0;
+#schedule-visit {
+  visibility: hidden;
   height: 40px;
   width: 212px;
   padding: 10px;
   margin: 10px;
-  background-color: rgb(70, 70, 70);
+  background-color: rgb(151, 151, 151);
   border-radius: 5px;
-  color: rgb(151, 151, 151);
+  color: rgb(70, 70, 70);
   border: none;
   font-weight: bold;
 }
-.schedule-visit:hover {
+#schedule-visit:hover {
   cursor: pointer;
   color: #fff;
   background-color: #000;
