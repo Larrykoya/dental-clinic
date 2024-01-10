@@ -420,7 +420,7 @@ function mountUserProfile() {
         />
   
         <input type="submit" class="long-btn" value="Update Profile" />
-        <input type="button" onclick="deleteAccount(${id})" id="${id}" style="background-color: red;" class="long-btn" value="Delete your account" />
+        <input type="button" onclick="deleteAccount(event)" id="${id}" style="background-color: red;" class="long-btn" value="Delete your account" />
       </form>`;
       cpane.innerHTML = `
         <div id="signup-container">
@@ -432,9 +432,11 @@ function mountUserProfile() {
       console.log(err);
     });
 }
-function deleteAccount(id) {
+function deleteAccount(event) {
+  event.preventDefault();
   let proceed = confirm("are you sure you want to delete your account?");
   if (proceed) {
+    let id = event.target.id;
     let role = getCookie("role");
     fetch("deleteAccount.php", {
       method: "POST",
@@ -582,7 +584,8 @@ function setAppointment(event) {
     })
     .catch((err) => console.log(err));
 }
-function cancelAppointment(id) {
+function cancelAppointment(event) {
+  let id = event.target.id;
   let proceed = confirm("are you sure you want to cancel this appointment?");
   if (proceed) {
     fetch("appointment.php", {
@@ -601,6 +604,7 @@ function cancelAppointment(id) {
         console.log(data);
         if (data.success) {
           alert(data.message);
+          mountAppointmentComponent();
         } else {
           alert(data.message);
         }
@@ -608,8 +612,9 @@ function cancelAppointment(id) {
       .catch((err) => console.log(err));
   }
 }
-function recordTreatment(appointment_id) {
+function recordTreatment(event) {
   let id = crypto.randomUUID();
+  let appointment_id = event.target.id;
   fetch("treatment.php", {
     method: "POST",
     headers: {

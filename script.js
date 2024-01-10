@@ -561,8 +561,10 @@ let mountAppointmentComponent = () => {
         <h4>Dr ${result.efname} ${result.elname}</h4>
         <p>${result.date}</p>
         <p>${result.time}</p>
-        <input type="button" class="btn" onclick="cancelAppointment(${result.id})" value="Cancel" />
-        <button onclick="cancelAppointment(id)" id="${result.id}" class="btn">Treatment complete</button>
+        <div class="flex">
+        <button onclick="cancelAppointment(event)" id="${result.id}" class="btn">Cancel</button>
+        <button onclick="recordTreatment(event)" id="${result.id}" class="btn">Treatment complete</button>
+        </div>
       </div>
     </span>
         `;

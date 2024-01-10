@@ -37,7 +37,7 @@ try {
   }
 // Sending response 
 if ($success) {
-    echo json_encode(array("success"=>$success,"message"=>"request successfully processed"));
+    echo json_encode(array("success"=>$success,"message"=>"Appointment has been set successfully"));
 }else{
     echo json_encode(array("message"=>"request process failed"));
 }
@@ -83,7 +83,7 @@ $id = $input['id'];
 $success = false;
 
 try {
-$query = "DELETE FROM appointments WHERE appointments_id = '$id'";
+$query = "DELETE FROM appointments WHERE appointment_id = '$id'";
 $success = mysqli_query($conn,$query);
 } catch (mysqli_sql_exception $e) {
 echo json_encode(array("message"=>$e));
@@ -91,7 +91,7 @@ echo json_encode(array("message"=>$e));
 }
 // Send a response back to JavaScript
 if ($success) {
-echo json_encode(array("success"=>$success,"message"=>"Account deletion successful!"));
+echo json_encode(array("success"=>$success,"message"=>"Appointment canceled"));
 }else{
 echo json_encode(array("success"=>$success,"message"=>"Error occoured"));
 }
