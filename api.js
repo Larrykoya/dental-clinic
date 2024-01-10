@@ -89,12 +89,12 @@ function login(event) {
 const logout = () => {
   let yes = confirm("are you sure you want to log out?");
   if (yes) {
-    alert(`Logout successful.`);
     location.reload();
     deleteCookie("id");
     deleteCookie("role");
     authBtn.style.visibility = "visible";
     profileBtn.style.visibility = "hidden";
+    alert(`Logout successful.`);
   }
 };
 function createRole(event) {
@@ -286,7 +286,6 @@ function postAnnouncement(event) {
   let employee_id = getCookie("id");
   let title = event.target[0].value;
   let message = event.target[1].value;
-  console.log(employee_id);
   fetch("announcement.php", {
     method: "POST",
     headers: {
@@ -300,7 +299,7 @@ function postAnnouncement(event) {
     }),
   })
     .then((response) => {
-      return response.text();
+      return response.json();
     })
     .then((data) => {
       console.log(data);
@@ -421,6 +420,7 @@ function mountUserProfile() {
         />
   
         <input type="submit" class="long-btn" value="Update Profile" />
+        <input type="button" onclick="deleteAccount(${id})" id="${id}" style="background-color: red;" class="long-btn" value="Delete your account" />
       </form>`;
       cpane.innerHTML = `
         <div id="signup-container">
@@ -431,6 +431,39 @@ function mountUserProfile() {
     .catch((err) => {
       console.log(err);
     });
+}
+function deleteAccount(id) {
+  let proceed = confirm("are you sure you want to delete your account?");
+  if (proceed) {
+    let role = getCookie("role");
+    fetch("deleteAccount.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id,
+        role,
+      }),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        if (data.success) {
+          alert(data.message);
+          location.reload();
+          deleteCookie("id");
+          deleteCookie("role");
+          authBtn.style.visibility = "visible";
+          profileBtn.style.visibility = "hidden";
+        } else {
+          alert(data.message);
+        }
+      })
+      .catch((err) => console.log(err));
+  }
 }
 function createEquipment(event) {
   event.preventDefault();
@@ -543,6 +576,58 @@ function setAppointment(event) {
       if (data.success) {
         alert(data.message);
         mountBookings();
+      } else {
+        alert(data.message);
+      }
+    })
+    .catch((err) => console.log(err));
+}
+function cancelAppointment(id) {
+  let proceed = confirm("are you sure you want to cancel this appointment?");
+  if (proceed) {
+    fetch("appointment.php", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id,
+      }),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        if (data.success) {
+          alert(data.message);
+        } else {
+          alert(data.message);
+        }
+      })
+      .catch((err) => console.log(err));
+  }
+}
+function recordTreatment(appointment_id) {
+  let id = crypto.randomUUID();
+  fetch("treatment.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id,
+      appointment_id,
+    }),
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+      if (data.success) {
+        alert(data.message);
+        location.reload();
       } else {
         alert(data.message);
       }

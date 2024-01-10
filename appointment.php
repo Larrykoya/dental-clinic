@@ -76,6 +76,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET'){
         echo json_encode(array("message"=>"request process failed"));
     }
 }
+if ($_SERVER['REQUEST_METHOD'] === 'DELETE'){
+    // Handle the incoming request from JavaScript
+$input = json_decode(file_get_contents('php://input'), true);
+$id = $input['id'];
+$success = false;
+
+try {
+$query = "DELETE FROM appointments WHERE appointments_id = '$id'";
+$success = mysqli_query($conn,$query);
+} catch (mysqli_sql_exception $e) {
+echo json_encode(array("message"=>$e));
+
+}
+// Send a response back to JavaScript
+if ($success) {
+echo json_encode(array("success"=>$success,"message"=>"Account deletion successful!"));
+}else{
+echo json_encode(array("success"=>$success,"message"=>"Error occoured"));
+}
+}
 
 mysqli_close($conn);
 ?>
